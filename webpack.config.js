@@ -68,6 +68,13 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     //.enableIntegrityHashes(Encore.isProduction())
 
+    //TailwindCSS PostCSS
+    .enablePostCssLoader((options) => {
+        options.postcssOptions = {
+            config: './postcss.config.js'
+        }
+    })
+
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
 ;
