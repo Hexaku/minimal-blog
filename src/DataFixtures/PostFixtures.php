@@ -10,11 +10,24 @@ use Doctrine\Persistence\ObjectManager;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface
 {
+    const POST_NAMES = [
+        'Man must explore, and this is exploration at its greatest',
+        '100 miles on the tracks of the Calusa',
+        'Failure is not an option',
+        'Me, love and other catastrophes',
+        'Rocky Mountain High',
+        'Life and death in the empire of the tiger',
+        'Couchsurfing in Iran',
+        'The end of a journey',
+        'Happy Antartica',
+        'The long road to water'
+    ];
+
     public function load(ObjectManager $manager): void
     {
-        for($i=0; $i<10; $i++){
+        foreach(self::POST_NAMES as $postName){
             $post = (new Post())
-                ->setTitle('Lorem ipsum dolor sit amet, consectetur adipiscing elit.')
+                ->setTitle($postName)
                 ->setSynopsis('Aenean pellentesque molestie interdum. Proin in tincidunt dolor, in elementum dui.')
                 ->setContent('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pellentesque molestie interdum. Proin in tincidunt dolor, in elementum dui. Vestibulum luctus sapien at aliquet vestibulum. Ut a arcu fermentum, pulvinar leo in, tempor neque. Quisque id sapien sodales, finibus eros vitae, euismod urna. Pellentesque volutpat porttitor justo, in ultrices tortor ullamcorper id. Vivamus sed ipsum ac elit luctus tincidunt vitae a nisi. In nulla nibh, mattis vel orci a, tempus placerat diam.
             Vestibulum et turpis commodo, ultrices massa vel, rutrum tortor. Nulla et est eu tellus auctor suscipit. Fusce sed elit et elit sodales ultricies a sed sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. In id nibh vel nibh tempor hendrerit. Mauris quis odio vitae elit placerat varius at a lacus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Fusce in euismod orci. Nunc molestie, orci in bibendum efficitur, sapien nisi efficitur turpis, a blandit mauris elit ac nisl. Quisque dui mi, dapibus ut tincidunt vel, ullamcorper eget ex. Curabitur molestie velit eget finibus scelerisque. Nullam faucibus euismod tortor, vitae laoreet mauris aliquet ac.

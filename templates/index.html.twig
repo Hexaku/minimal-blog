@@ -3,6 +3,7 @@
 {% block title %}Minimal Blog{% endblock %}
 
 {% block body %}
+<body class="bg-gray-200 font-sans leading-normal tracking-normal"> 
 <!--Header-->
 	<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url({{ asset('build/images/mountains.jpg') }}); height: 60vh; max-height:460px; background-position: 0px 600px;">
 			<div class="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
@@ -25,10 +26,10 @@
 						<div class="flex w-1/2 pl-4 text-sm">
 							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
 								<li class="mr-2">
-								<a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="#">HOME</a>
+								<a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="{{ path('home') }}">HOME</a>
 								</li>
 								<li class="mr-2">
-								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="#">POSTS</a>
+								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{  path('posts_list') }}">POSTS</a>
 								</li>
 								<li class="mr-2">
 								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="#">CATEGORIES</a>
@@ -211,17 +212,7 @@
 			
 	
 				<!--Author-->
-				<div class="flex w-full items-center font-sans p-8 md:p-24">
-					<img class="w-10 h-10 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of Author">
-					<div class="flex-1">
-						<p class="text-base font-bold text-base md:text-xl leading-none">About Me</p>
-						<p class="text-gray-600 text-xs md:text-base">I like to travel and share my experiences in this blog !</p>
-						<p class="text-gray-600 text-xs md:text-base">The template used for this project is from <a class="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500" href="https://www.tailwindtoolbox.com">TailwindToolbox.com</a></p>
-					</div>
-					<div class="justify-end">
-						<button class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">Read More</button>
-					</div>
-				</div>
+				{% include '_author.html.twig' %}
 				<!--/Author-->
 			
 		</div>
@@ -242,10 +233,10 @@
 				<div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
 					<ul class="list-reset flex justify-center flex-1 md:flex-none items-center">
 					  <li>
-						<a class="inline-block py-2 px-3 text-white no-underline" href="#">HOME</a>
+						<a class="inline-block py-2 px-3 text-white no-underline" href="{{ path('home') }}">HOME</a>
 					  </li>
 					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">POSTS</a>
+						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="{{  path('posts_list') }}">POSTS</a>
 					  </li>
 					  <li>
 						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">CATEGORIES</a>
@@ -268,4 +259,5 @@
 		//Init tooltips
 		tippy('.avatar')
 	</script>
+</body>
 {% endblock %}
