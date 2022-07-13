@@ -5,9 +5,10 @@ namespace App\DataFixtures;
 use App\Entity\Post;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class PostFixtures extends Fixture
+class PostFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -30,5 +31,12 @@ class PostFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CategoryFixtures::class
+        ];
     }
 }
