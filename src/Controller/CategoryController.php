@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,10 +24,13 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{slug}', name: 'show')]
-    public function show(Category $category)
+    public function show(Category $category, EntityManagerInterface $manager)
     {
+        $categoryRepository = $manager->getRepository(Category::class);
+        $posts = $categoryRepository->findAllLatestPosts($category->getId());
         return $this->render('category/show.html.twig', [
-            'category' => $category
+            'category' => $category,
+            'posts' => $posts
         ]);
     }
 }

@@ -39,6 +39,18 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllLatestPosts(int $categoryId)
+    {
+        return $this->createQueryBuilder('c')
+            ->select('p.id', 'p.title', 'p.synopsis', 'p.created_at', 'p.slug')
+            ->setParameter('categoryId', $categoryId)
+            ->innerJoin('c.posts', 'p')
+            ->orderBy('p.created_at', 'DESC')
+            ->andWhere('c.id = :categoryId')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Category[] Returns an array of Category objects
 //     */
