@@ -8,7 +8,7 @@
 	<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url({{ asset('build/images/mountains.jpg') }}); height: 60vh; max-height:460px; background-position: 0px 600px;">
 			<div class="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
 				<!--Title-->
-					<p class="text-white font-extrabold text-3xl md:text-6xl" style="font-family: 'Raleway', sans-serif;">
+					<p class="text-white font-extrabold text-3xl md:text-6xl font-raleway">
 						Minimal Blog
 					</p>
 			</div>
@@ -32,7 +32,7 @@
 								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{  path('posts_list') }}">POSTS</a>
 								</li>
 								<li class="mr-2">
-								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="#">CATEGORIES</a>
+								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
 								</li>
 								<li class="mr-2">
 								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="post_vue.html">POST_VUE</a>
@@ -239,7 +239,7 @@
 						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="{{  path('posts_list') }}">POSTS</a>
 					  </li>
 					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">CATEGORIES</a>
+						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="{{ path('categories_list') }}">CATEGORIES</a>
 					  </li>
 						<li>
 						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">link</a>
