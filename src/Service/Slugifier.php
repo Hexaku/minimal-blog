@@ -6,6 +6,7 @@ class Slugifier
 {
     public function slugify(string $string): string
     {
+        // Handmade slugifier but should resolve most cases
         $string = mb_strtolower($string);
         $string = str_replace(['!', '?', '/', '\\', '@', '&', '$', '€', '$', '%'], '', $string);
         $string = trim($string);

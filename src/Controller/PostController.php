@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,9 +19,11 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/', name:'show')]
-    public function show()
+    #[Route('/{slug}', name:'show')]
+    public function show(Post $post)
     {
-        return $this->render('post/show.html.twig');
+        return $this->render('post/show.html.twig', [
+            'post' => $post
+        ]);
     }
 }

@@ -6,8 +6,6 @@
 	<!--Nav-->
     {% include '_header.html.twig' %}
     <!--Nav-->
-
-	
 	
 	<!--Title-->
 	<div class="text-center pt-16 md:pt-32">
@@ -24,7 +22,7 @@
 						<a href="#" class="no-underline hover:no-underline">
 								<img src="https://source.unsplash.com/collection/{{ key }}/400x200" class="h-48 w-full rounded-t shadow-lg">
 								<div class="p-6 h-auto md:h-48">	
-									<p class="text-gray-600 text-xs md:text-sm">GETTING STARTED</p>
+									<p class="text-gray-600 text-xs md:text-sm">{{ post.category.name }}</p>
 									<div class="font-bold text-xl text-gray-900">{{ post.title }}</div>
 									<p class="text-gray-800 font-serif text-base mb-5">
 										{{ post.synopsis }} 
