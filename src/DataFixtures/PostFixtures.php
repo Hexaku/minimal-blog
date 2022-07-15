@@ -47,7 +47,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             $randTimestamp = mt_rand(1577833200, 1656626400);
             $post->setCreatedAt((new DateTime())->setTimestamp($randTimestamp));
             // Random category
-            $randCategoryId = rand(0,3);
+            $randCategoryId = rand(0,4);
             $post->setCategory($this->getReference("category_$randCategoryId"));
 
             $manager->persist($post);

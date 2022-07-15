@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function home(PostRepository $postRepository)
     {
         // Template can accept 6 posts maximum
-        $posts = $postRepository->findLastXPosts(7);
+        $posts = $postRepository->findLastXPosts(6);
         return $this->render('index.html.twig', [
             'posts' => $posts
         ]);
