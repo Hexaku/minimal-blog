@@ -1,12 +1,12 @@
 <nav class="bg-gray-900 p-4 mt-0 w-full">
-    <div class="container mx-auto flex items-center">
-        <div class="flex text-white font-extrabold">
+    <div class="container mx-auto flex items-center justify-between">
+        <div class="flex text-white font-extrabold md:block hidden">
             <a class="flex text-white text-base no-underline hover:text-white hover:no-underline" href="{{ path('home') }}"> 
-                <span class="hidden w-0 md:w-auto md:block pl-1">Minimal Blog</span>
+                <span class="hidden w-auto md:w-32 md:block pl-1">Minimal Blog</span>
             </a>
         </div>
-        <div class="flex pl-4 text-sm">
-            <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+        <div class="flex pl-4 text-sm md:w-1/2 md:justify-start">
+            <ul class="list-reset flex justify-between flex-1 md:flex-none items-center" >
                 <li class="mr-2">
                 <a class="inline-block py-2 px-2 text-white no-underline" href="{{ path('home') }}">HOME</a>
                 </li>
@@ -16,8 +16,15 @@
                 <li class="mr-2">
                 <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
                 </li>
+            </ul>
+        </div>
+        <div class="flex pl-4 text-sm content-center justify-end md:w-1/2 md:justify-end">
+            <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
                 <li class="mr-2">
-                <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_register') }}">REGISTER</a>
+                <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_register') }}">SIGN UP</a>
+                </li>
+                <li class="mr-2">
+                <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_login') }}">LOGIN</a>
                 </li>
             </ul>
         </div>

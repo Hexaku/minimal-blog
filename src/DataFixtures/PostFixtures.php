@@ -11,7 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface
 {
-    const POST_NAMES = [
+    public const POST_NAMES = [
         'Man must explore, and this is exploration at its greatest',
         '100 miles on the tracks of the Calusa',
         'Failure is not an option',
