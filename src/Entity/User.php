@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Validator\ContainsAlphaNumericOnly;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -42,6 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         max: 4096,
         maxMessage: "Your username should not be more than 4096 characters"
     )]
+    #[ContainsAlphaNumericOnly(message: "Your username should only contains letters and numbers")]
     private $username;
 
     public function getId(): ?int
