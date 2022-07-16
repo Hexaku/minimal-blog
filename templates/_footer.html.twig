@@ -3,20 +3,32 @@
 
 			<div class="w-full mx-auto flex flex-wrap items-center">
 				<div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
-					<a class="text-gray-900 no-underline hover:text-gray-900 hover:no-underline" href="{{ path('home') }}">
+					<a class="text-gray-900 no-underline hover:text-gray-900 hover:no-underline" href="{{ path('app_home') }}">
 						<span class="text-base text-gray-200">Minimal Blog</span>
 					</a>
 				</div>
 				<div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
 					<ul class="list-reset flex justify-center flex-1 md:flex-none items-center">
 					  <li>
-						<a class="inline-block py-2 px-3 text-white no-underline" href="{{ path('home') }}">HOME</a>
+						<a 
+							class="inline-block py-2 px-3 text-gray-600 no-underline hover:text-gray-200" 
+							href="{{ path('app_home') }}">
+							HOME
+						</a>
 					  </li>
 					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="{{ path('posts_list') }}">POSTS</a>
+						<a 
+							class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('posts_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+							href="{{ path('posts_list') }}">
+							POSTS
+						</a>
 					  </li>
 					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="{{ path('categories_list') }}">CATEGORIES</a>
+						<a 
+							class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('categories_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+							href="{{ path('categories_list') }}">
+							CATEGORIES
+						</a>
 					  </li>
 					</ul>
 				</div>

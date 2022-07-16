@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-    #[Route('/', name: 'home')]
+    #[Route('/', name: 'app_home')]
     public function home(PostRepository $postRepository)
     {
         // Current home template will display 6 posts maximum
