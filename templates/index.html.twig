@@ -23,31 +23,31 @@
 						<div class="flex w-1/2 pl-4 text-md font-bold">
 							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
 								<li class="mr-2">
-								<a class="inline-block py-2 px-2 text-white no-underline hover:underline" href="{{ path('app_home') }}">HOME</a>
+								<a class="inline-block py-2 px-2 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
 								</li>
 								<li class="mr-2">
-								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{  path('posts_list') }}">POSTS</a>
+								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{  path('posts_list') }}">POSTS</a>
 								</li>
 								<li class="mr-2">
-								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
+								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
 								</li>
 							</ul>
 						</div>
-						<div class="flex w-1/2 justify-end content-center text-md">	
+						<div class="flex w-1/2 justify-end content-center text-md font-bold">	
 							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
 							{% if app.user %}
 								<li class="mr-2">
-									<p class="inline-block text-white no-underline py-2 px-2">{{ app.user.username}}</p>
+									<p class="inline-block text-white no-underline py-2 px-2">{{ app.user.username }}</p>
 								</li>
 								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{ path('app_logout') }}">LOGOUT</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('app_logout') }}">LOGOUT</a>
 								</li>
 							{% else %}
 								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{ path('app_register') }}">SIGN UP</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('app_register') }}">SIGN UP</a>
 								</li>
 								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-2" href="{{ path('app_login') }}">LOGIN</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('app_login') }}">LOGIN</a>
 								</li>
 							{% endif %}
 							</ul>
@@ -251,10 +251,10 @@
 						<a class="inline-block py-2 px-3 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
 					  </li>
 					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="{{  path('posts_list') }}">POSTS</a>
+						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{  path('posts_list') }}">POSTS</a>
 					  </li>
 					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="{{ path('categories_list') }}">CATEGORIES</a>
+						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{ path('categories_list') }}">CATEGORIES</a>
 					  </li>
 					</ul>
 				</div>

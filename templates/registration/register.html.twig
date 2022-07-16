@@ -22,7 +22,7 @@
                     'label_attr': {'class': 'block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2', 'for': 'username'}
                 }) }}
                 {{ form_widget(registrationForm.username, {'attr': {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500', 'placeholder': 'FlyingTuna47', 'id': 'username'}}) }}
-                {{ form_errors(registrationForm.username) }}
+                <div class="text-red-600">{{ form_errors(registrationForm.username) }}</div>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -32,7 +32,7 @@
                     'label_attr': {'class': 'block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2', 'for': 'email'}
                 }) }}
                 {{ form_widget(registrationForm.email, {'attr': {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500', 'placeholder': 'example@minimal.com', 'id': 'email'}}) }}
-                {{ form_errors(registrationForm.email) }}
+                <div class="text-red-600">{{ form_errors(registrationForm.email) }}</div>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -42,7 +42,7 @@
                     'label_attr': {'class': 'block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2', 'for': 'password'}
                 }) }}            
                 {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:bg-white focus:border-gray-500', 'placeholder': '******************', 'id': 'password'}}) }}
-                {{ form_errors(registrationForm.plainPassword) }}
+                <div class="text-red-600">{{ form_errors(registrationForm.plainPassword)}}</div>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
