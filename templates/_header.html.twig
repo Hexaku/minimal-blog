@@ -20,12 +20,21 @@
         </div>
         <div class="flex pl-4 text-sm content-center justify-end md:w-1/2 md:justify-end">
             <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+                {% if app.user %}
                 <li class="mr-2">
-                <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_register') }}">SIGN UP</a>
+                    <p class="inline-block text-white no-underline py-2 px-2">{{ app.user.username }}</p>
                 </li>
                 <li class="mr-2">
-                <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_login') }}">LOGIN</a>
+                    <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_logout') }}">LOGOUT</a>
                 </li>
+                {% else %}
+                <li class="mr-2">
+                    <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_register') }}">SIGN UP</a>
+                </li>
+                <li class="mr-2">
+                    <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2" href="{{ path('app_login') }}">LOGIN</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </div>

@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      'raleway': ['raleway'],    
+      'raleway': ['raleway'],
     }
   },
   plugins: [],

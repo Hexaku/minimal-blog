@@ -15,6 +15,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $admin = (new User())
+            ->setUsername('admin')
             ->setEmail('admin@minimal.com')
             ->setRoles(['ROLE_ADMIN']);
         $adminPlainPassword = 'admin';
@@ -24,6 +25,7 @@ class UserFixtures extends Fixture
         $manager->persist($admin);
 
         $user = (new User())
+            ->setUsername('user')
             ->setEmail('user@minimal.com')
             ->setRoles(['ROLE_USER']);
         $userPlainPassword = 'user';
