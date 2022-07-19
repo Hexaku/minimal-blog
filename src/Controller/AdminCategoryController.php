@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -9,8 +10,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminCategoryController extends AbstractController
 {
     #[Route('/', name:'list')]
-    public function list()
+    public function list(CategoryRepository $categoryRepository)
     {
-        return $this->render('admin/category.html.twig');
+        $categories = $categoryRepository->findAll();
+        return $this->render('admin/category.html.twig', [
+            'categories' => $categories
+        ]);
     }
 }
