@@ -24,8 +24,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email()]
     #[Assert\NotBlank()]
     #[Assert\Length(
-        max: 4096,
-        maxMessage: "Your email should not be more than 4096 characters"
+        max: 255,
+        maxMessage: "Your email should not be more than 255 characters"
     )]
     private $email;
 
@@ -40,8 +40,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(
         min:3,
         minMessage: "Your username should be at least 3 characters",
-        max: 4096,
-        maxMessage: "Your username should not be more than 4096 characters"
+        max: 255,
+        maxMessage: "Your username should not be more than 255 characters"
     )]
     #[ContainsAlphaNumericOnly(message: "Your username should only contains letters and numbers")]
     private $username;
