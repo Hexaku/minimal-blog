@@ -18,7 +18,9 @@
 				<input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search...">
           </div>
 				<div class="lg:ml-40 ml-10 space-x-8">
-					<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus"></i></span> Add category</button>
+					<a href="{{ path('admin_category_new')}}">
+                        <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus"></i></span> New category</button>
+                    </a>
 				</div>
 			</div>
 		</div>
@@ -43,8 +45,12 @@
 									<p class="text-gray-900 whitespace-no-wrap font-bold">{{ category.name }}</p>
 								</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <button class="mx-1 bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-file-pen"></i></span> Edit</button>
-                                <button class="mx-1 bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-trash-can"></i></span> Delete</button>
+                                    <a href="{{ path('admin_category_edit', {'slug': category.slug}) }}">
+                                        <button class="mx-1 bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-file-pen"></i></span> Edit</button>
+                                    </a>
+                                    <a href="{{ path('admin_category_delete', {'slug': category.slug}) }}">
+                                        <button class="mx-1 bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-trash-can"></i></span> Delete</button>
+                                    </a>
                                 </td>
 							</tr>
                             {% endfor %}
