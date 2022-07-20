@@ -69,10 +69,10 @@
 									<p class="text-gray-900 whitespace-no-wrap">{{ post.category.name }}</p>
 								</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
-                                    <a href="">
+                                    <a href="{{ path('admin_post_edit', {slug: post.slug}) }}">
                                         <button class="mx-1 bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-file-pen"></i></span> Edit</button>
                                     </a>
-									<!--  include 'category/_delete_form.html.twig' -->
+									{% include 'post/_delete_form.html.twig' %}
                                 </td>
 							</tr>
                             {% endfor %}
