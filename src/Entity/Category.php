@@ -25,7 +25,6 @@ class Category
         max: 255,
         maxMessage: "Your category should not be more than 255 characters"
     )]
-    #[ContainsAlphaNumericOnly(message: 'Your category should only contains letters and numbers')]
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class, orphanRemoval: true)]

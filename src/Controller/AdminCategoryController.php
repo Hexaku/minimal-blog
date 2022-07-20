@@ -29,7 +29,7 @@ class AdminCategoryController extends AbstractController
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             $slug = $slugifier->slugify($category->getName());
             $category->setSlug($slug);
 
@@ -66,9 +66,11 @@ class AdminCategoryController extends AbstractController
     }
 
     #[Route('/{slug}/delete', name:'delete')]
-    public function delete(Category $category, CategoryRepository $categoryRepository)
+    public function delete(Category $category, CategoryRepository $categoryRepository, Request $request)
     {
-        $categoryRepository->remove($category, true);
+        if ($this->isCsrfTokenValid('delete'.$category->getSlug(), $request->request->get('_token'))) {
+            $categoryRepository->remove($category, true);
+        }
         return $this->redirectToRoute('admin_category_list');
     }
 }
