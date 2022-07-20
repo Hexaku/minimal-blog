@@ -9,27 +9,36 @@
 				</div>
 				<div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
 					<ul class="list-reset flex justify-center flex-1 md:flex-none items-center">
-					  <li>
-						<a 
-							class="inline-block py-2 px-3 text-gray-600 no-underline hover:text-gray-200" 
-							href="{{ path('app_home') }}">
-							HOME
-						</a>
-					  </li>
-					  <li>
-						<a 
-							class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('posts_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
-							href="{{ path('posts_list') }}">
-							POSTS
-						</a>
-					  </li>
-					  <li>
-						<a 
-							class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('categories_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
-							href="{{ path('categories_list') }}">
-							CATEGORIES
-						</a>
-					  </li>
+						<li>
+							<a 
+								class="inline-block py-2 px-3 text-gray-600 no-underline hover:text-gray-200" 
+								href="{{ path('app_home') }}">
+								HOME
+							</a>
+						</li>
+						<li>
+							<a 
+								class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('posts_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+								href="{{ path('posts_list') }}">
+								POSTS
+							</a>
+						</li>
+						<li>
+							<a 
+								class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('categories_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+								href="{{ path('categories_list') }}">
+								CATEGORIES
+							</a>
+						</li>
+						<li>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a 
+								class="inline-block no-underline hover:text-gray-200 py-2 px-3 text-gray-600" 
+								href="{{ path('admin_index') }}">
+								ADMIN DASHBOARD
+							</a>
+						{% endif %}
+						</li>
 					</ul>
 				</div>
 			</div>

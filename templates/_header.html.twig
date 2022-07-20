@@ -8,26 +8,35 @@
         <div class="flex pl-4 text-sm md:w-1/2 md:justify-start">
             <ul class="list-reset flex justify-between flex-1 md:flex-none items-center" >
                 <li class="mr-2">
-                <a 
-                    class="inline-block py-2 px-2 no-underline hover:text-gray-200 hover:text-underline {% if (app.request.pathInfo == path('app_home')) %} text-white {% else %} text-gray-600 {% endif %}" 
-                    href="{{ path('app_home') }}">
-                    HOME
-                </a>
+                    <a 
+                        class="inline-block py-2 px-2 no-underline hover:text-gray-200 hover:text-underline {% if (app.request.pathInfo == path('app_home')) %} text-white {% else %} text-gray-600 {% endif %}" 
+                        href="{{ path('app_home') }}">
+                        HOME
+                    </a>
                 </li>
                 <li class="mr-2">
-                <a 
-                    class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2 {% if (app.request.pathInfo == path('posts_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
-                    href="{{ path('posts_list') }}">
-                    POSTS
-                </a>
+                    <a 
+                        class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2 {% if (app.request.pathInfo == path('posts_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+                        href="{{ path('posts_list') }}">
+                        POSTS
+                    </a>
                 </li>
                 <li class="mr-2">
-                <a 
-                    class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2 {% if (app.request.pathInfo == path('categories_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
-                    href="{{ path('categories_list') }}">
-                    CATEGORIES
-                </a>
+                    <a 
+                        class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2 {% if (app.request.pathInfo == path('categories_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+                        href="{{ path('categories_list') }}">
+                        CATEGORIES
+                    </a>
                 </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li class="mr-2">
+                    <a 
+                        class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-2 text-gray-600" 
+                        href="{{ path('admin_index') }}">
+                        ADMIN DASHBOARD
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </div>
         <div class="flex pl-4 text-sm content-center justify-end md:w-1/2 md:justify-end">

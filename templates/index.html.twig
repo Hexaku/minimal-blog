@@ -20,24 +20,29 @@
 				<!--Nav-->
 				<nav class="mt-0 w-full bg-sky-500">
 					<div class="container mx-auto flex items-center">
-						<div class="flex w-1/2 pl-4 text-md font-bold">
+						<div class="flex w-1/2 pl-4 text-md">
 							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
 								<li class="mr-2">
-								<a class="inline-block py-2 px-2 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
+									<a class="inline-block py-2 px-2 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
 								</li>
 								<li class="mr-2">
-								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{  path('posts_list') }}">POSTS</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{  path('posts_list') }}">POSTS</a>
 								</li>
 								<li class="mr-2">
-								<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
 								</li>
+								{% if is_granted('ROLE_ADMIN') %}
+								<li class="mr-2">
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('admin_index') }}">ADMIN DASHBOARD</a>
+								</li>
+								{% endif %}
 							</ul>
 						</div>
-						<div class="flex w-1/2 justify-end content-center text-md font-bold">	
+						<div class="flex w-1/2 justify-end content-center text-md">	
 							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
 							{% if app.user %}
 								<li class="mr-2">
-									<p class="inline-block text-white no-underline py-2 px-2">{{ app.user.username }}</p>
+									<p class="inline-block text-white no-underline py-2 px-2 font-bold">{{ app.user.username }}</p>
 								</li>
 								<li class="mr-2">
 									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('app_logout') }}">LOGOUT</a>
@@ -247,15 +252,20 @@
 				</div>
 				<div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
 					<ul class="list-reset flex justify-center flex-1 md:flex-none items-center">
-					  <li>
-						<a class="inline-block py-2 px-3 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
-					  </li>
-					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{  path('posts_list') }}">POSTS</a>
-					  </li>
-					  <li>
-						<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{ path('categories_list') }}">CATEGORIES</a>
-					  </li>
+						<li>
+							<a class="inline-block py-2 px-3 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
+						</li>
+						<li>
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{  path('posts_list') }}">POSTS</a>
+						</li>
+						<li>
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{ path('categories_list') }}">CATEGORIES</a>
+						</li>
+						{% if is_granted('ROLE_ADMIN') %}
+						<li>
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{ path('admin_index') }}">ADMIN DASHBOARD</a>
+						</li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>
