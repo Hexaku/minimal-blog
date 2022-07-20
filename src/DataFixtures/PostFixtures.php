@@ -11,7 +11,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class PostFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const POST_NAMES = [
+    public const POST_TITLES = [
         'Man must explore, and this is exploration at its greatest',
         '100 miles on the tracks of the Calusa',
         'Failure is not an option',
@@ -29,9 +29,9 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::POST_NAMES as $postName){
+        foreach(self::POST_TITLES as $postTitle){
             $post = (new Post())
-                ->setTitle($postName)
+                ->setTitle($postTitle)
                 ->setSynopsis('Aenean pellentesque molestie interdum. Proin in tincidunt dolor, in elementum dui.')
                 ->setContent('
                 <p class="text-2xl md:text-3xl mb-5">Praesent quis nisi non justo efficitur sagittis sed sit amet felis.</p>
@@ -42,7 +42,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
                 <li class="py-3">Morbi varius posuere blandit. Praesent gravida bibendum neque eget commodo. Duis auctor ornare mauris, eu accumsan odio viverra in. Proin sagittis maximus pharetra. Nullam lorem mauris, faucibus ut odio tempus, ultrices aliquet ex. Nam id quam eget ipsum luctus hendrerit. Ut eros magna, eleifend ac ornare vulputate, pretium nec felis.</li>
                 <li class="py-3">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc vitae pretium elit. Cras leo mauris, tristique in risus ac, tristique rutrum velit. Mauris accumsan tempor felis vitae gravida. Cras egestas convallis malesuada. Etiam ac ante id tortor vulputate pretium. Maecenas vel sapien suscipit, elementum odio et, consequat tellus.</li>
                 </ol>')
-                ->setSlug($this->slugifier->slugify($postName));
+                ->setSlug($this->slugifier->slugify($postTitle));
             // Random timestamp between 01/01/2020 and 01/07/2022
             $randTimestamp = mt_rand(1577833200, 1656626400);
             $post->setCreatedAt((new DateTime())->setTimestamp($randTimestamp));
