@@ -18,14 +18,14 @@
 						</li>
 						<li>
 							<a 
-								class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('posts_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+								class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if route_name starts with "posts_" %} text-white {% else %} text-gray-600 {% endif %}" 
 								href="{{ path('posts_list') }}">
 								POSTS
 							</a>
 						</li>
 						<li>
 							<a 
-								class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if (app.request.pathInfo == path('categories_list')) %} text-white {% else %} text-gray-600 {% endif %}" 
+								class="inline-block no-underline hover:text-gray-200 py-2 px-3 {% if route_name starts with "categories_" %} text-white {% else %} text-gray-600 {% endif %}" 
 								href="{{ path('categories_list') }}">
 								CATEGORIES
 							</a>

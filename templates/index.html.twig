@@ -26,7 +26,7 @@
 									<a class="inline-block py-2 px-2 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
 								</li>
 								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{  path('posts_list') }}">POSTS</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('posts_list') }}">POSTS</a>
 								</li>
 								<li class="mr-2">
 									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
@@ -64,7 +64,7 @@
 				{% if posts|length > 0 %}
 				<!--Lead Card-->
 				<div class="flex h-full bg-white rounded overflow-hidden shadow-lg">
-					<a href="{{ path('posts_show', {'slug':  posts[0].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
+					<a href="{{ path('posts_show', {'slug':  posts[0].slug}) }}" class="flex flex-wrap no-underline hover:no-underline w-full">
 						<div class="w-full md:w-2/3 rounded-t">	
 							<img src="https://source.unsplash.com/collection/494263/800x600" class="h-full w-full shadow">
 						</div>
