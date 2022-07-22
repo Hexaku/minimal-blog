@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -18,6 +19,13 @@ class Comment
     private $author;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(
+        min: 3,
+        minMessage: "Your comment should be at least 3 characters",
+        max: 255,
+        maxMessage: "Your comment should not be more than 255 characters"
+    )]
     private $content;
 
     #[ORM\Column(type: 'datetime')]

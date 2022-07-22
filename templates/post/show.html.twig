@@ -35,9 +35,17 @@
 
 			<div class="border"></div>
 
+			{% if app.user %}
 			<!--Comment Form-->
 			{% include 'comment/_form.html.twig' %}
 			<!--/Comment Form-->
+			{% else %}
+			<div class="flex items-center justify-center my-24">
+				<div class="rounded-xl border p-5 w-9/12 bg-white">
+					<p class="text-lg md:text-lg text-green-500">You need to be connected to post a comment ! <a href="{{ path('app_login') }}" class="font-bold hover:underline">Login here</a> or <a href="{{ path('app_register') }}" class="font-bold hover:underline">Join us !</a></p>
+				</div>
+			</div>
+			{% endif %}
 
 			<!--Comment thread-->
 			<div class="pb-24">
@@ -83,20 +91,9 @@
 			</div>
 			<!--/Comment Thread-->
 
-			<!--Subscribe-->	
-			<div class="container font-sans bg-green-100 rounded mt-8  mb-24 p-4 md:p-24 text-center">
-				<h2 class="font-bold break-normal text-2xl md:text-4xl">Subscribe to Ghostwind CSS</h2>
-				<h3 class="font-bold break-normal font-normal text-gray-600 text-base md:text-xl">Get the latest posts delivered right to your inbox</h3>
-				<div class="w-full text-center pt-4">
-					<form action="#">
-						<div class="max-w-sm mx-auto p-1 pr-0 flex flex-wrap items-center">
-							<input type="email" placeholder="youremail@example.com" class="flex-1 appearance-none rounded shadow p-3 text-gray-600 mr-2 focus:outline-none">
-							<button type="submit" class="flex-1 mt-4 md:mt-0 block md:inline-block appearance-none bg-green-500 text-white text-base font-semibold tracking-wider uppercase py-4 rounded shadow hover:bg-green-400">Subscribe</button>
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- /Subscribe-->
+			<!--Newsletter-->	
+			{% include '_newsletter.html.twig' %}
+			<!-- /Newsletter-->
 		</div>
 	</div>
 
