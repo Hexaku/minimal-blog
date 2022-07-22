@@ -30,6 +30,34 @@ class TimeExtension extends AbstractExtension
     {
         $today = new DateTime();
         $interval = $today->diff($from);
-        return $interval->format('%a days ago');
+        $totalDays = $interval->days;
+        $totalMonths = $interval->m + ($interval->y * 12);
+        $totalYears = $interval->y;
+        $totalHours = $interval->h;
+        $totalMinutes = $interval->i;
+
+        if($totalYears > 1){
+            return $interval->format('%y years ago');
+        } else if($totalYears === 1){
+            return $interval->format('%y year ago');
+        } else if($totalMonths > 1){
+            return $interval->format('%m months ago');
+        } else if($totalMonths === 1){
+            return $interval->format('%m month ago');
+        } else if($totalDays > 1){
+            return $interval->format('%a days ago');
+        } else if($totalDays === 1) {
+            return $interval->format('%a day ago');
+        } else if($totalHours > 1) {
+            return $interval->format('%h hours ago');
+        } else if($totalHours === 1) {
+            return $interval->format('%h hour ago');
+        } else if($totalMinutes > 1) {
+            return $interval->format('%i minutes ago');
+        } else if($totalMinutes === 1) {
+            return $interval->format('%i minute ago');
+        } else {
+            return $interval->format('now');
+        }
     }
 }

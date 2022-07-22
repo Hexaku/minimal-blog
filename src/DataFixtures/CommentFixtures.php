@@ -40,7 +40,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
                 // Add 1 to 30 days to the comment date after the post's creation date
                 $randomDaysNumber = rand(1,30);
                 $comment->setCreatedAt($post->getCreatedAt()->add(new DateInterval('P' . $randomDaysNumber . 'D')));
-    
+                
                 // Random user being author of the comment
                 $randUserId = rand(0, count(UserFixtures::USERNAMES)-1);
                 $comment->setAuthor($this->getReference("user_$randUserId"));
