@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,8 +21,9 @@ class PostController extends AbstractController
     }
 
     #[Route('/{slug}', name:'show')]
-    public function show(Post $post)
+    public function show(Post $post, CommentRepository $commentRepository)
     {
+        //$comments = $commentRepository->f
         return $this->render('post/show.html.twig', [
             'post' => $post
         ]);

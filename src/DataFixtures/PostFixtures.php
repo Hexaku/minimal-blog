@@ -29,7 +29,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::POST_TITLES as $postTitle){
+        foreach(self::POST_TITLES as $postId => $postTitle){
             $post = (new Post())
                 ->setTitle($postTitle)
                 ->setSynopsis('Aenean pellentesque molestie interdum. Proin in tincidunt dolor, in elementum dui.')
@@ -49,6 +49,9 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
             // Random category
             $randCategoryId = rand(0,4);
             $post->setCategory($this->getReference("category_$randCategoryId"));
+
+            // References : category_0, category_1, category_2 ...
+            $this->addReference("post_$postId", $post);
 
             $manager->persist($post);
         }

@@ -39,6 +39,11 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllLatestCommentsByPost(int $postId)
+    {
+        return $this->createQueryBuilder('c');
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */
