@@ -21,7 +21,7 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         'I love reading your blog while i\'m on break',
         'Small habits leads to great results !',
         'The landscape looks heavenly !',
-        'Care to the wild animals, they could be dangerous !'
+        'Care to wild animals, they could be dangerous !'
     ];
 
     public function load(ObjectManager $manager): void

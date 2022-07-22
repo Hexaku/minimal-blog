@@ -41,7 +41,13 @@ class CommentRepository extends ServiceEntityRepository
 
     public function findAllLatestCommentsByPost(int $postId)
     {
-        return $this->createQueryBuilder('c');
+        return $this->createQueryBuilder('c')
+            ->setParameter('postId', $postId)
+            ->innerJoin('c.post', 'p')
+            ->orderBy('c.created_at', 'DESC')
+            ->andWhere('c.post = :postId')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

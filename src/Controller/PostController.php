@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -23,9 +24,13 @@ class PostController extends AbstractController
     #[Route('/{slug}', name:'show')]
     public function show(Post $post, CommentRepository $commentRepository)
     {
-        //$comments = $commentRepository->f
+        $comments = $commentRepository->findAllLatestCommentsByPost($post->getId());
+        $today = new DateTime();
+        //$today->diff($comments[0]->getCreatedAt()
+        //dd($today->diff($comments[0]->getCreatedAt()));
         return $this->render('post/show.html.twig', [
-            'post' => $post
+            'post' => $post,
+            'comments' => $comments
         ]);
     }
 }
