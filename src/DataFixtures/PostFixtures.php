@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Post;
 use App\Service\Slugifier;
 use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -45,7 +46,7 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
                 ->setSlug($this->slugifier->slugify($postTitle));
             // Random timestamp between 01/01/2020 and 01/07/2022
             $randTimestamp = mt_rand(1577833200, 1656626400);
-            $post->setCreatedAt((new DateTime())->setTimestamp($randTimestamp));
+            $post->setCreatedAt((new DateTimeImmutable())->setTimestamp($randTimestamp));
             // Random category
             $randCategoryId = rand(0,4);
             $post->setCategory($this->getReference("category_$randCategoryId"));

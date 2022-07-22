@@ -46,12 +46,12 @@ class Post
     )]
     private $synopsis;
 
-    #[ORM\Column(type: 'datetime')]
-    private $created_at;
-
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
     private $category;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $created_at;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $slug;
@@ -105,18 +105,6 @@ class Post
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -125,6 +113,18 @@ class Post
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
 
         return $this;
     }

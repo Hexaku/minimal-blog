@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Comment;
+use DateInterval;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -28,11 +29,17 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
         // Creating 3 comments for every Post, each one from a random user.
         foreach(PostFixtures::POST_TITLES as $postId => $postTitle){
             for($i=0; $i<3; $i++) {
+                $post = $this->getReference("post_$postId");
+
                 $randCommentContentId = rand(0, count(self::COMMENT_CONTENTS)-1);
+                $post = $this->getReference("post_$postId");
                 $comment = (new Comment())
                     ->setContent(self::COMMENT_CONTENTS[$randCommentContentId])
-                    ->setPost($this->getReference("post_$postId"))
-                    ->setCreatedAt(new DateTime());
+                    ->setPost($post);
+
+                // Add 1 to 30 days to the comment date after the post's creation date
+                $randomDaysNumber = rand(1,30);
+                $comment->setCreatedAt($post->getCreatedAt()->add(new DateInterval('P' . $randomDaysNumber . 'D')));
     
                 // Random user being author of the comment
                 $randUserId = rand(0, count(UserFixtures::USERNAMES)-1);
