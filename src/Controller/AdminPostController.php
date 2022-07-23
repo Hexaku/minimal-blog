@@ -6,7 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\Slugifier;
-use DateTime;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,7 +33,7 @@ class AdminPostController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $slug = $slugifier->slugify($post->getTitle());
             $post->setSlug($slug);
-            $post->setCreatedAt(new DateTime());
+            $post->setCreatedAt(new DateTimeImmutable());
 
             $postRepository->add($post, true);
 

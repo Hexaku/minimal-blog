@@ -26,10 +26,10 @@
 									<a class="inline-block py-2 px-2 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
 								</li>
 								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('posts_list') }}">POSTS</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('post_list') }}">POSTS</a>
 								</li>
 								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('categories_list') }}">CATEGORIES</a>
+									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('category_list') }}">CATEGORIES</a>
 								</li>
 								{% if is_granted('ROLE_ADMIN') %}
 								<li class="mr-2">
@@ -64,7 +64,7 @@
 				{% if posts|length > 0 %}
 				<!--Lead Card-->
 				<div class="flex h-full bg-white rounded overflow-hidden shadow-lg">
-					<a href="{{ path('posts_show', {'slug':  posts[0].slug}) }}" class="flex flex-wrap no-underline hover:no-underline w-full">
+					<a href="{{ path('post_show', {'slug':  posts[0].slug}) }}" class="flex flex-wrap no-underline hover:no-underline w-full">
 						<div class="w-full md:w-2/3 rounded-t">	
 							<img src="https://source.unsplash.com/collection/494263/800x600" class="h-full w-full shadow">
 						</div>
@@ -97,7 +97,7 @@
 					<!--1/3 col -->
 					<div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
 						<div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-							<a href="{{ path('posts_show', {'slug':  posts[1].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
+							<a href="{{ path('post_show', {'slug':  posts[1].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
 								<img src="https://source.unsplash.com/collection/225/800x600" class="h-64 w-full rounded-t pb-6">
 								<p class="w-full text-gray-600 text-xs md:text-sm px-6">{{ posts[1].category.name|upper}}</p>
 								<div class="w-full font-bold text-xl text-gray-900 px-6">{{ posts[1].title }}</div>
@@ -120,7 +120,7 @@
 					<!--1/3 col -->
 					<div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
 						<div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-							<a href="{{ path('posts_show', {'slug':  posts[2].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
+							<a href="{{ path('post_show', {'slug':  posts[2].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
 								<img src="https://source.unsplash.com/collection/3106804/800x600" class="h-64 w-full rounded-t pb-6">
 								<p class="w-full text-gray-600 text-xs md:text-sm px-6">{{ posts[2].category.name|upper}}</p>
 								<div class="w-full font-bold text-xl text-gray-900 px-6">{{ posts[2].title }}</div>
@@ -142,7 +142,7 @@
 					<!--1/3 col -->
 					<div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
 						<div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-							<a href="{{ path('posts_show', {'slug':  posts[3].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
+							<a href="{{ path('post_show', {'slug':  posts[3].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
 								<img src="https://source.unsplash.com/collection/539527/800x600" class="h-64 w-full rounded-t pb-6">
 								<p class="w-full text-gray-600 text-xs md:text-sm px-6">{{ posts[3].category.name|upper}}</p>
 								<div class="w-full  font-bold text-xl text-gray-900 px-6">{{ posts[3].title }}</div>
@@ -164,7 +164,7 @@
 					<!--1/2 col -->
 					<div class="w-full md:w-1/2 p-6 flex flex-col flex-grow flex-shrink">
 						<div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-							<a href="{{ path('posts_show', {'slug':  posts[4].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
+							<a href="{{ path('post_show', {'slug':  posts[4].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">
 								<img src="https://source.unsplash.com/collection/3657445/800x600" class="h-full w-full rounded-t pb-6">
 								<p class="w-full text-gray-600 text-xs md:text-sm px-6">{{ posts[4].category.name|upper}}</p>
 								<div class="w-full font-bold text-xl text-gray-900 px-6">{{ posts[4].title }}</div>
@@ -186,7 +186,7 @@
 					<!--1/2 col -->
 					<div class="w-full md:w-1/2 p-6 flex flex-col flex-grow flex-shrink">
 						<div class="flex-1 flex-row bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-							<a href="{{ path('posts_show', {'slug':  posts[5].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">	
+							<a href="{{ path('post_show', {'slug':  posts[5].slug}) }}" class="flex flex-wrap no-underline hover:no-underline">	
 								<img src="https://source.unsplash.com/collection/764827/800x600" class="h-full w-full rounded-t pb-6">
 								<p class="w-full text-gray-600 text-xs md:text-sm px-6">{{ posts[5].category.name|upper}}</p>
 								<div class="w-full font-bold text-xl text-gray-900 px-6">{{ posts[5].title }}</div>
@@ -239,10 +239,10 @@
 							<a class="inline-block py-2 px-3 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
 						</li>
 						<li>
-							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{  path('posts_list') }}">POSTS</a>
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{  path('post_list') }}">POSTS</a>
 						</li>
 						<li>
-							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{ path('categories_list') }}">CATEGORIES</a>
+							<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-3" href="{{ path('category_list') }}">CATEGORIES</a>
 						</li>
 						{% if is_granted('ROLE_ADMIN') %}
 						<li>

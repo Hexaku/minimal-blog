@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit comment{% endblock %}
+
+{% block body %}
+<body class="bg-white font-sans leading-normal tracking-normal">
+
+	<!--Nav-->
+    {% include '_header.html.twig' %}
+    <!--Nav-->
+
+    <div class="text-center pt-16 md:pt-32 pb-16">
+		<h1 class="font-bold break-normal text-3xl md:text-5xl">Edit Comment</h1>
+	</div>
+
+	{% if app.user %}
+	<!--Comment Form-->
+	{% include 'comment/_form.html.twig' %}
+	<!--/Comment Form-->
+	{% else %}
+	<div class="flex items-center justify-center my-24">
+		<div class="rounded-xl border p-5 w-9/12 bg-white">
+			<p class="text-lg md:text-lg text-green-500">You need to be connected to post a comment ! <a href="{{ path('app_login') }}" class="font-bold hover:underline">Login here</a> or <a href="{{ path('app_register') }}" class="font-bold hover:underline">Join us !</a></p>
+		</div>
+	</div>
+	{% endif %}
+
+</body>
+{% endblock %}
+
+

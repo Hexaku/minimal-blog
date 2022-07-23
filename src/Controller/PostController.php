@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/posts', name: 'posts_')]
+#[Route('/posts', name: 'post_')]
 class PostController extends AbstractController
 {
     #[Route('/', name:'list')]
@@ -41,7 +41,7 @@ class PostController extends AbstractController
 
             $commentRepository->add($comment, true);
 
-            return $this->redirectToRoute('posts_show', ['slug' => $post->getSlug()]);
+            return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
         }
 
         return $this->renderForm('post/show.html.twig', [

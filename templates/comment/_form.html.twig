@@ -1,4 +1,4 @@
-<div class="flex items-center justify-center my-24">
+<div class="flex items-center justify-center mb-24">
     <div class="rounded-xl border p-5 w-9/12 bg-white">
         {{ form_start(commentForm, {'attr': {'class': 'w-full bg-white rounded-lg px-4 pt-2'}}) }}
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -8,9 +8,9 @@
                     <div class="text-red-600">{{ form_errors(commentForm.content) }}</div>
                 </div>
             </div>
-            <div class="w-full md:w-full flex items-start md:w-full px-3">
+            <div class="w-full md:w-full flex items-start md:w-full">
                 <div class="-mr-1">
-                    <button type="submit" class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100">
+                    <button type="submit" class="bg-green-500 text-white font-bold py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-green-600">
                         {{ buttonLabel|default('Submit') }}
                     </button>
                 </div>
