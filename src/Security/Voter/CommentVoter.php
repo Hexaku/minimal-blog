@@ -27,13 +27,14 @@ class CommentVoter extends Voter
             return false;
         }
 
-        // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case self::DELETE:
             case self::EDIT:
+                // User author only can edit his comment
                 return $user->getId() === $comment->getAuthor()->getId();
-                // logic to determine if the user can EDIT
-                // return true or false
+                break;
+            case self::DELETE:
+                // Admin or User author can delete comment
+                return ($user->getId() === $comment->getAuthor()->getId() || in_array('ROLE_ADMIN', $user->getRoles()));
                 break;
         }
 
