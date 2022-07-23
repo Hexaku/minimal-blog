@@ -84,16 +84,22 @@
 									</div>
 									<div class="w-full md:w-full flex items-start md:w-full px-3">
 										<div class="-mr-1">
-										<a href="{{ path('comment_edit', {id: comment.id}) }}">
-											<button class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100">
-												Edit
-											</button>
-										</a>
+										{% if is_granted('EDIT', comment) %}
+											<a href="{{ path('comment_edit', {id: comment.id}) }}">
+												<button class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100">
+													Edit
+												</button>
+											</a>
+										{% endif %}
 										</div>
 										<div class="-mr-1">
-											<button type="submit" class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100">
-												Delete
-											</button>
+										{% if is_granted('EDIT', comment) %}
+											<a href="#">
+												<button class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100">
+													Delete
+												</button>
+											</a>
+										{% endif %}
 										</div>
 									</div>
 								</div>

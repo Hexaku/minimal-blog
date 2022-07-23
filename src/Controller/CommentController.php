@@ -15,6 +15,9 @@ class CommentController extends AbstractController
     #[Route('/{id}/edit', name:'edit')]
     public function edit(Comment $comment, CommentRepository $commentRepository, Request $request)
     {
+        // Only author of the comment can edit it (CommentVoter)
+        $this->denyAccessUnlessGranted('EDIT', $comment);
+        
         $post = $comment->getPost();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);

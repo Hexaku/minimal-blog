@@ -48,7 +48,7 @@ class PostController extends AbstractController
             'post' => $post,
             'comments' => $comments,
             'commentForm' => $commentForm,
-            'buttonLabel' => 'Post Comment'
+            'buttonLabel' => 'Post comment'
         ]);
     }
 }
