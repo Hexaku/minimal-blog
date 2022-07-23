@@ -30,7 +30,7 @@ class AdminPostController extends AbstractController
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
             $slug = $slugifier->slugify($post->getTitle());
             $post->setSlug($slug);
             $post->setCreatedAt(new DateTime());

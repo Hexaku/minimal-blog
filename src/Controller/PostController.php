@@ -29,11 +29,12 @@ class PostController extends AbstractController
     {
         $comments = $commentRepository->findAllLatestCommentsByPost($post->getId());
 
+        // A user can post a comment under every post
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
         $commentForm->handleRequest($request);
 
-        if($commentForm->isSubmitted()){
+        if($commentForm->isSubmitted() && $commentForm->isValid()){
             $comment->setAuthor($this->getUser());
             $comment->setCreatedAt(new DateTime());
             $comment->setPost($post);
