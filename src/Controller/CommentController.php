@@ -17,7 +17,7 @@ class CommentController extends AbstractController
     {
         // Only author of the comment can edit it (CommentVoter)
         $this->denyAccessUnlessGranted('EDIT', $comment);
-        
+
         $post = $comment->getPost();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -32,5 +32,15 @@ class CommentController extends AbstractController
             'post' => $post,
             'buttonLabel' => 'Edit comment'
         ]);
+    }
+
+    #[Route('/{id}/delete', name:'delete')]
+    public function delete(Comment $comment, CommentRepository $commentRepository, Request $request)
+    {
+        $post = $comment->getPost();
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+            $commentRepository->remove($comment, true);
+        }
+        return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
     }
 }
