@@ -1,0 +1,27 @@
+# Read the documentation: https://symfony.com/doc/current/bundles/FOSCKEditorBundle/index.html
+
+twig:
+    form_themes:
+        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+
+#fos_ck_editor:
+#    input_sync: true
+#    default_config: base_config
+#    configs:
+#        base_config:
+#            toolbar:
+#                - { name: "styles", items: ['Bold', 'Italic', 'BulletedList', 'Link'] } FOS\CKEditorBundle\Config\CKEditorConfiguration
+
+fos_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+            stylesSet: "my_styles"
+            toolbar:
+                - { name: 'full.styles', items: [ 'Styles', 'Format', 'TextColor' ] }
+                - { name: "styles", items: ['Bold', 'Italic', 'BulletedList', 'Link'] }
+    styles:
+        my_styles:
+            - { name: "H1", element: "p", attributes: { class: "text-2xl md:text-3xl mb-5" }}
+            - { name: "Paragraph", element: "p", attributes: { class: "py-6" }}
+            - { name: "Quote", element: "p", attributes: { class: "border-l-4 border-green-500 italic my-8 pl-8 md:pl-12" }}

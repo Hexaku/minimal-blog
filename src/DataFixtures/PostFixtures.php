@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Post;
 use App\Service\Slugifier;
-use DateTime;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
