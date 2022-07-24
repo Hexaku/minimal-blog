@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\NewsletterSubscriber;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Form\NewsletterSubscriberType;
 use App\Repository\CommentRepository;
+use App\Repository\NewsletterSubscriberRepository;
 use App\Repository\PostRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +28,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{slug}', name:'show')]
-    public function show(Post $post, CommentRepository $commentRepository, Request $request)
+    public function show(Post $post, CommentRepository $commentRepository, NewsletterSubscriberRepository $newsletterSubscriberRepository, Request $request)
     {
         $comments = $commentRepository->findAllLatestCommentsByPost($post->getId());
 
@@ -45,11 +48,23 @@ class PostController extends AbstractController
             return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
         }
 
+        $newsletterSubscriber = new NewsletterSubscriber();
+        $newsletterSubscriberForm = $this->createForm(NewsletterSubscriberType::class, $newsletterSubscriber);
+        $newsletterSubscriberForm->handleRequest($request);
+
+        if($newsletterSubscriberForm->isSubmitted() && $newsletterSubscriberForm->isValid()){
+            $newsletterSubscriberRepository->add($newsletterSubscriber, true);
+
+            return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
+        }
+
         return $this->renderForm('post/show.html.twig', [
             'post' => $post,
             'comments' => $comments,
             'commentForm' => $commentForm,
-            'buttonLabel' => 'Post comment'
+            'buttonLabelComment' => 'Post comment',
+            'newsletterSubscriberForm' => $newsletterSubscriberForm,
+            'buttonLabelNewsletter' => 'Subscribe'
         ]);
     }
 }

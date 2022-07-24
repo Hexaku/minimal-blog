@@ -31,7 +31,7 @@ class CommentController extends AbstractController
         return $this->renderForm('comment/edit.html.twig', [
             'commentForm' => $form,
             'post' => $post,
-            'buttonLabel' => 'Edit comment'
+            'buttonLabelComment' => 'Edit comment'
         ]);
     }
 

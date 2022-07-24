@@ -1,0 +1,11 @@
+<div class="flex justify-center">
+    {{ form_start(newsletterSubscriberForm, {'attr': {'class': 'w-full max-w-lg'}}) }}
+        <div class="text-red-600">{{ form_errors(newsletterSubscriberForm.email) }}</div>
+        <div class="max-w-xl mx-auto p-1 pr-0 flex flex-wrap items-center">
+            {{ form_widget(newsletterSubscriberForm.email, {'attr': {'class': 'flex-1 appearance-none rounded shadow p-3 text-gray-600 mr-2 focus:outline-none', 'placeholder': 'youremail@example.com'}}) }}
+            <button type="submit" class="flex-1 mt-4 md:mt-0 block md:inline-block appearance-none bg-green-500 text-white text-base font-semibold tracking-wider uppercase py-4 rounded shadow hover:bg-green-400">
+                {{ buttonLabelNewsletter|default('Submit') }}
+            </button>
+        </div>  
+    {{ form_end(newsletterSubscriberForm) }}
+</div>
