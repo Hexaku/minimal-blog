@@ -35,7 +35,8 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
                 $post = $this->getReference("post_$postId");
                 $comment = (new Comment())
                     ->setContent(self::COMMENT_CONTENTS[$randCommentContentId])
-                    ->setPost($post);
+                    ->setPost($post)
+                    ->setIsEdited(false);
 
                 // Add 1 to 30 days to the comment date after the post's creation date
                 $randomDaysNumber = rand(1,30);

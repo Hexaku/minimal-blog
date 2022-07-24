@@ -35,6 +35,9 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private $post;
 
+    #[ORM\Column(type: 'boolean')]
+    private $is_edited;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,6 +87,18 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function isIsEdited(): ?bool
+    {
+        return $this->is_edited;
+    }
+
+    public function setIsEdited(bool $is_edited): self
+    {
+        $this->is_edited = $is_edited;
 
         return $this;
     }

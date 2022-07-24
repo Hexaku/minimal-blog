@@ -23,6 +23,7 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+            $comment->setIsEdited(true);
             $commentRepository->add($comment, true);
             return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
         }

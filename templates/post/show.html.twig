@@ -56,10 +56,16 @@
 							<div class="flex items-center space-x-3">
 							<img class="h-8 w-8 rounded-full bg-slate-400" src="https://i.pravatar.cc/32?img={{loop.index}}">
 								<div class="text-lg font-bold text-slate-700">{{ comment.author.username }}</div>
+								{% if "ROLE_ADMIN" in comment.author.roles %}
+									<button class="rounded-2xl border bg-green-200 px-3 py-1 text-xs font-semibold">Author</button>
+								{% endif %}
 							</div>
 
 							<div class="flex items-center justify-between">
-								<div class="flex items-center space-x-8">
+								<div class="flex items-center space-x-4">
+									{% if comment.isEdited %}
+										<button class="rounded-2xl border bg-gray-200 px-3 py-1 text-xs font-semibold">Edited</button>
+									{% endif %}
 									<div class="text-sm text-neutral-500">{{comment.createdAt|ago }}</div>
 								</div>
 							</div>

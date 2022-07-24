@@ -38,6 +38,7 @@ class PostController extends AbstractController
             $comment->setAuthor($this->getUser());
             $comment->setCreatedAt(new DateTime());
             $comment->setPost($post);
+            $comment->setIsEdited(false);
 
             $commentRepository->add($comment, true);
 
