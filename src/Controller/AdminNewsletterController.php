@@ -47,4 +47,31 @@ class AdminNewsletterController extends AbstractController
             'newsletter' => $newsletter
         ]);
     }
+
+    #[Route('/{id}/edit', name:'edit')]
+    public function edit(Newsletter $newsletter, NewsletterRepository $newsletterRepository, Request $request)
+    {
+        $form = $this->createForm(NewsletterType::class, $newsletter);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $newsletterRepository->add($newsletter, true);
+            return $this->redirectToRoute('admin_newsletter_list');
+        }
+
+        return $this->renderForm('admin/newsletter_edit.html.twig', [
+            'newsletterForm' => $form,
+            'buttonLabel' => "Edit newsletter" 
+        ]);
+    }
+
+    #[Route('/{id}/delete', name:'delete')]
+    public function delete(Newsletter $newsletter, NewsletterRepository $newsletterRepository, Request $request)
+    {
+        if ($this->isCsrfTokenValid('delete'.$newsletter->getId(), $request->request->get('_token'))) {
+            $newsletterRepository->remove($newsletter, true);
+        }
+        return $this->redirectToRoute('admin_newsletter_list');
+    }
 }

@@ -18,6 +18,9 @@
 				<input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search...">
           </div>
 				<div class="lg:ml-40 ml-10 space-x-8">
+					<a href="#">
+                        <button class="bg-yellow-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-users"></i></span> Show subscriber list</button>
+                    </a>
 					<a href="{{ path('admin_newsletter_new')}}">
                         <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus"></i></span> New newsletter</button>
                     </a>
@@ -68,10 +71,10 @@
 									<a href="{{ path('admin_newsletter_show', {'id': newsletter.id}) }}">
                                         <button class="mx-1 bg-blue-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-eye"></i></span> Show</button>
                                     </a>
-                                    <a href="#">
+                                    <a href="{{ path('admin_newsletter_edit', {"id": newsletter.id }) }}">
                                         <button class="mx-1 bg-green-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-file-pen"></i></span> Edit</button>
                                     </a>
-									<!-- include 'category/_delete_form.html.twig' -->
+									{% include 'newsletter/_delete_form.html.twig' %}
                                 </td>
 							</tr>
                             {% endfor %}

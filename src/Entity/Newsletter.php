@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\NewsletterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NewsletterRepository::class)]
 class Newsletter
@@ -14,9 +15,17 @@ class Newsletter
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 3,
+        minMessage: "Your newsletter title should not be less than 3 characters",
+        max: 255,
+        maxMessage: "Your newsletter title should not exceed 255 characters"
+    )]
     private $title;
 
     #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
     private $content;
 
     #[ORM\Column(type: 'boolean')]

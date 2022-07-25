@@ -1,10 +1,7 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block main %}
-    <div class="text-center pt-16 pb-16">
-        <h1 class="font-bold break-normal text-3xl md:text-5xl">Show newsletter {{newsletter.id}}</h1>
-    </div>
-    <div class="flex justify-center pt-8 md:pt-8 pb-8">
+    <div class="flex justify-center pt-16 md:pt-16 pb-16">
         <a href="#" class="block p-6 max-w-3xl bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <h5 class="text-center mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ newsletter.title }}</h5>
             <p class="font-normal text-gray-700 dark:text-gray-400">{{ newsletter.content }}</p>
