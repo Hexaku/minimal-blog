@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('admin_category_delete', {'slug': category.slug}) }}" onsubmit="return confirm('Are you sure to delete this category ? (All posts linked to it will be deleted !)');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.slug) }}">
-    <button class="mx-1 bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-trash-can"></i></span> Delete</button>
+    <button class="mx-1 bg-red-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-trash-can"></i></span> Delete</button>
 </form>

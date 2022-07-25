@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('admin_post_delete', {'slug': post.slug}) }}" onsubmit="return confirm('Are you sure to delete this post ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ post.slug) }}">
-    <button class="mx-1 bg-red-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-trash-can"></i></span> Delete</button>
+    <button class="mx-1 bg-red-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-trash-can"></i></span> Delete</button>
 </form>
