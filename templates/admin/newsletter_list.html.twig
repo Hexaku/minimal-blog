@@ -18,7 +18,7 @@
 				<input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search...">
           </div>
 				<div class="lg:ml-40 ml-10 space-x-8">
-					<a href="{{ path('admin_category_new')}}">
+					<a href="{{ path('admin_newsletter_new')}}">
                         <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus"></i></span> New newsletter</button>
                     </a>
 				</div>
@@ -37,6 +37,9 @@
 								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Title
 								</th>
+								<th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+									Status
+								</th>
                                 <th class="w-1/6 px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 									Actions
 								</th>
@@ -51,12 +54,22 @@
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap font-bold">{{ newsletter.title }}</p>
 								</td>
+								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+									{% if newsletter.isSent %}
+										<button class="rounded-2xl border bg-green-200 px-3 py-1 text-xs font-semibold cursor-auto">Sent</button>
+									{% else %}
+										<button class="rounded-2xl border bg-red-200 px-3 py-1 text-xs font-semibold cursor-auto">Not Sent</button>
+									{% endif %}
+								</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
 									<a href="#">
                                         <button class="mx-1 bg-orange-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-envelope"></i></span> Send</button>
                                     </a>
+									<a href="{{ path('admin_newsletter_show', {'id': newsletter.id}) }}">
+                                        <button class="mx-1 bg-blue-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-eye"></i></span> Show</button>
+                                    </a>
                                     <a href="#">
-                                        <button class="mx-1 bg-green-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-file-pen"></i></span> Edit</button>
+                                        <button class="mx-1 bg-green-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-file-pen"></i></span> Edit</button>
                                     </a>
 									<!-- include 'category/_delete_form.html.twig' -->
                                 </td>

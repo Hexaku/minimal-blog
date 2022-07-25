@@ -19,6 +19,9 @@ class Newsletter
     #[ORM\Column(type: 'text')]
     private $content;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isSent;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Newsletter
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function isIsSent(): ?bool
+    {
+        return $this->isSent;
+    }
+
+    public function setIsSent(bool $isSent): self
+    {
+        $this->isSent = $isSent;
 
         return $this;
     }
