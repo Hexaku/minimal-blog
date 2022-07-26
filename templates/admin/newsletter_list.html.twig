@@ -65,7 +65,7 @@
 									{% endif %}
 								</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
-									<a href="#">
+									<a href="{{ path('admin_newsletter_send', {'id': newsletter.id }) }}">
                                         <button class="mx-1 bg-orange-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-envelope"></i></span> Send</button>
                                     </a>
 									<a href="{{ path('admin_newsletter_show', {'id': newsletter.id}) }}">

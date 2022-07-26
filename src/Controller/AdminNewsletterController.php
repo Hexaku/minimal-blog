@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
 use App\Repository\NewsletterRepository;
+use App\Repository\NewsletterSubscriberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/newsletters', name:'admin_newsletter_')]
@@ -72,6 +75,26 @@ class AdminNewsletterController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$newsletter->getId(), $request->request->get('_token'))) {
             $newsletterRepository->remove($newsletter, true);
         }
+        return $this->redirectToRoute('admin_newsletter_list');
+    }
+
+    #[Route('/{id}/send', name:'send')]
+    public function send(Newsletter $newsletter, NewsletterSubscriberRepository $newsletterSubscriberRepository, NewsletterRepository $newsletterRepository, MailerInterface $mailer)
+    {
+        $newsletterSubscribers = $newsletterSubscriberRepository->findAll();
+        foreach($newsletterSubscribers as $newsletterSubscriber){
+            $email = (new Email())
+            ->from('newsletter@minimal.com')
+            ->to($newsletterSubscriber->getEmail())
+            ->subject($newsletter->getTitle())
+            ->text($newsletter->getContent());
+            
+            $mailer->send($email);
+        }
+
+        $newsletter->setIsSent(true);
+        $newsletterRepository->add($newsletter, true);
+        
         return $this->redirectToRoute('admin_newsletter_list');
     }
 }
