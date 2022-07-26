@@ -15,12 +15,13 @@ final class NewsletterEmailMessageHandler implements MessageHandlerInterface
     public function __invoke(NewsletterEmailMessage $message)
     {
         $email = (new Email())
-            ->from($message->getSender())
-            ->to($message->getReceiver())
+            ->to($message->getRecipient())
             ->subject($message->getTitle())
             ->text($message->getContent());
 
+        // Delay to test async messages
         sleep(1);
+
         $this->mailer->send($email);
     }
 }

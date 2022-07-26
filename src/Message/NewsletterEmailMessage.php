@@ -4,17 +4,12 @@ namespace App\Message;
 
 final class NewsletterEmailMessage
 {
-    public function __construct( private string $sender, private string $receiver, private string $title, private string $content)
+    public function __construct(private string $recipient, private string $title, private string $content)
     {}
 
-    public function getSender(): string
+    public function getRecipient(): string
     {
-        return $this->sender;
-    }
-
-    public function getReceiver(): string
-    {
-        return $this->receiver;
+        return $this->recipient;
     }
 
     public function getTitle(): string

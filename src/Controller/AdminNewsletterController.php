@@ -86,7 +86,6 @@ class AdminNewsletterController extends AbstractController
         $newsletterSubscribers = $newsletterSubscriberRepository->findAll();
         foreach($newsletterSubscribers as $newsletterSubscriber){
             $bus->dispatch(new NewsletterEmailMessage(
-                'newsletter@minimal.com',
                 $newsletterSubscriber->getEmail(),
                 $newsletter->getTitle(),
                 $newsletter->getContent()
