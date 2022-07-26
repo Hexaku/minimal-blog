@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Newsletter;
 use App\Form\NewsletterType;
+use App\Message\NewsletterEmailMessage;
 use App\Repository\NewsletterRepository;
 use App\Repository\NewsletterSubscriberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -79,17 +81,16 @@ class AdminNewsletterController extends AbstractController
     }
 
     #[Route('/{id}/send', name:'send')]
-    public function send(Newsletter $newsletter, NewsletterSubscriberRepository $newsletterSubscriberRepository, NewsletterRepository $newsletterRepository, MailerInterface $mailer)
+    public function send(Newsletter $newsletter, NewsletterSubscriberRepository $newsletterSubscriberRepository, NewsletterRepository $newsletterRepository, MessageBusInterface $bus)
     {
         $newsletterSubscribers = $newsletterSubscriberRepository->findAll();
         foreach($newsletterSubscribers as $newsletterSubscriber){
-            $email = (new Email())
-            ->from('newsletter@minimal.com')
-            ->to($newsletterSubscriber->getEmail())
-            ->subject($newsletter->getTitle())
-            ->text($newsletter->getContent());
-            
-            $mailer->send($email);
+            $bus->dispatch(new NewsletterEmailMessage(
+                'newsletter@minimal.com',
+                $newsletterSubscriber->getEmail(),
+                $newsletter->getTitle(),
+                $newsletter->getContent()
+            ));
         }
 
         $newsletter->setIsSent(true);
