@@ -41,7 +41,8 @@ class CategoryController extends AbstractController
             'lastResult' => $lastResult,
             'firstResult' => $firstResult,
             'currentPageNumber' => $pageNumber,
-            'path' => 'category_list'
+            'path' => 'category_list',
+            'name' => 'categories'
         ]);
     }
 

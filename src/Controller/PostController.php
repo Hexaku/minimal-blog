@@ -48,7 +48,8 @@ class PostController extends AbstractController
             'lastResult' => $lastResult,
             'firstResult' => $firstResult,
             'currentPageNumber' => $pageNumber,
-            'path' => "post_list"
+            'path' => 'post_list',
+            'name' => 'posts'
         ]);
     }
 
