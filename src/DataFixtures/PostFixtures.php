@@ -21,7 +21,19 @@ class PostFixtures extends Fixture implements DependentFixtureInterface
         'Couchsurfing in Iran',
         'The end of a journey',
         'Happy Antartica',
-        'The long road to water'
+        'The long road to water',
+        'Keepers of Ganesh: The Vanishing Art of Mahout',
+        'Women at the End of the Land',
+        'Warm Waters',
+        'Amazed',
+        'Journey Through the Sahara',
+        'Life and Stress at the Ice Edge',
+        'The Gris-gris Wrestlers of Senegal',
+        'Beards, Bribery, and Ballot Boxes',
+        'The Last Hunter Gatherers',
+        'Voices from a Melting World',
+        'Wakhan, An Other Afghanistan',
+        'Where Children Sleep'
     ];
 
     public function __construct(private Slugifier $slugifier)

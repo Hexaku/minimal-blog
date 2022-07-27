@@ -18,12 +18,34 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/posts', name: 'post_')]
 class PostController extends AbstractController
 {
-    #[Route('/', name:'list')]
-    public function list(PostRepository $postRepository)
+    #[Route('/page/{pageNumber}', name:'list')]
+    public function list(PostRepository $postRepository, int $pageNumber = 1)
     {
-        $posts = $postRepository->findAll();
+        //TODO check pageNumber !!
+
+        $posts = $postRepository->getPostsByPage($pageNumber);
+        $totalPosts = count($posts);
+
+        $totalPostsPerPage = $postRepository::TOTAL_POSTS_PER_PAGE;
+        $totalPages = ceil($totalPosts / $totalPostsPerPage);
+        $pageNumbers = range(1, $totalPages);
+        $firstResult = 1 + ($totalPostsPerPage * ($pageNumber - 1));
+        $pageLastPost = $totalPostsPerPage * $pageNumber;
+
+        if($pageLastPost > $totalPosts){
+            $pageLastPost = $totalPosts;
+        }
+
+        if($firstResult > $totalPosts){
+            $firstResult = $totalPosts;
+        }
+
         return $this->render('post/index.html.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'totalPosts' => $totalPosts,
+            'pageLastPost' => $pageLastPost,
+            'firstResult' => $firstResult,
+            'pageNumbers' => $pageNumbers
         ]);
     }
 
