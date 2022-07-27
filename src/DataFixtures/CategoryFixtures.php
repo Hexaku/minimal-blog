@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class CategoryFixtures extends Fixture
 {
-    public const CATEGORY_NAMES = ['Travel', 'Adventure', 'Exploration', 'Discovery', 'Mindset'];
+    public const CATEGORY_NAMES = ['Travel', 'Adventure', 'Exploration', 'Discovery', 'Mindset', 'Category6', 'Category7', 'Category8', 'Category9'];
 
     public function __construct(private Slugifier $slugifier)
     {}

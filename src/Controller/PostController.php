@@ -43,11 +43,12 @@ class PostController extends AbstractController
 
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
-            'totalPosts' => $totalPosts,
+            'totalElements' => $totalPosts,
             'totalPages' => $totalPages,
             'lastResult' => $lastResult,
             'firstResult' => $firstResult,
-            'currentPageNumber' => $pageNumber
+            'currentPageNumber' => $pageNumber,
+            'path' => "post_list"
         ]);
     }
 

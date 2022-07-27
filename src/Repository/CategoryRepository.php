@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
+    public const TOTAL_CATEGORIES_PER_PAGE = 6;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Category::class);
@@ -39,9 +42,30 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    public function getCategoryQueryBuilder()
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+        return $queryBuilder;
+    }
+
+    public function getCategoriesByPage(int $pageNumber)
+    {
+        $totalCategoriesPerPage = self::TOTAL_CATEGORIES_PER_PAGE;
+		$firstResult = ($pageNumber - 1) * $totalCategoriesPerPage;
+
+        $queryBuilder = $this->getCategoryQueryBuilder()
+            ->setFirstResult($firstResult)
+            ->setMaxResults($totalCategoriesPerPage);
+        
+        $query = $queryBuilder->getQuery();
+
+        $paginator = new Paginator($query, true);
+        return $paginator;
+    }
+
     public function findAllLatestPosts(int $categoryId)
     {
-        return $this->createQueryBuilder('c')
+        return $this->getCategoryQueryBuilder()
             ->select('p.id', 'p.title', 'p.synopsis', 'p.created_at', 'p.slug')
             ->setParameter('categoryId', $categoryId)
             ->innerJoin('c.posts', 'p')
