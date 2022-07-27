@@ -18,24 +18,25 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/posts', name: 'post_')]
 class PostController extends AbstractController
 {
-    #[Route('/page/{pageNumber}', name:'list')]
+    #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
     public function list(PostRepository $postRepository, int $pageNumber = 1)
     {
-        //TODO check pageNumber !!
-
+        // Get posts by page and total posts count
         $posts = $postRepository->getPostsByPage($pageNumber);
         $totalPosts = count($posts);
 
+        // Calculate total pages count
         $totalPostsPerPage = $postRepository::TOTAL_POSTS_PER_PAGE;
         $totalPages = ceil($totalPosts / $totalPostsPerPage);
-        $pageNumbers = range(1, $totalPages);
+
+        // Get first result page number and last result page number
         $firstResult = 1 + ($totalPostsPerPage * ($pageNumber - 1));
-        $pageLastPost = $totalPostsPerPage * $pageNumber;
+        $lastResult = $totalPostsPerPage * $pageNumber;
 
-        if($pageLastPost > $totalPosts){
-            $pageLastPost = $totalPosts;
-        }
-
+        // Can't exceed total posts count
+        if($lastResult > $totalPosts){
+            $lastResult = $totalPosts;
+        } 
         if($firstResult > $totalPosts){
             $firstResult = $totalPosts;
         }
@@ -43,9 +44,10 @@ class PostController extends AbstractController
         return $this->render('post/index.html.twig', [
             'posts' => $posts,
             'totalPosts' => $totalPosts,
-            'pageLastPost' => $pageLastPost,
+            'totalPages' => $totalPages,
+            'lastResult' => $lastResult,
             'firstResult' => $firstResult,
-            'pageNumbers' => $pageNumbers
+            'currentPageNumber' => $pageNumber
         ]);
     }
 
