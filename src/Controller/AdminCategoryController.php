@@ -13,12 +13,39 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/categories', name:'admin_category_')]
 class AdminCategoryController extends AbstractController
 {
-    #[Route('/', name:'list')]
-    public function list(CategoryRepository $categoryRepository)
+    #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
+    public function list(CategoryRepository $categoryRepository, int $pageNumber = 1)
     {
-        $categories = $categoryRepository->findAll();
+        // Get categories by page admin and total categories count
+        $categories = $categoryRepository->getCategoriesByPage($pageNumber, true);
+        $totalCategories = count($categories);
+
+        // Calculate total pages count
+        $totalCategoriesPerPage = $categoryRepository::ADMIN_TOTAL_CATEGORIES_PER_PAGE;
+        $totalPages = ceil($totalCategories / $totalCategoriesPerPage);
+
+        // Get first result page number and last result page number
+        $firstResult = 1 + ($totalCategoriesPerPage * ($pageNumber - 1));
+        $lastResult = $totalCategoriesPerPage * $pageNumber;
+
+        // Can't exceed total categories count
+        if($lastResult > $totalCategories){
+            $lastResult = $totalCategories;
+        } 
+        if($firstResult > $totalCategories){
+            $firstResult = $totalCategories;
+        }
+
         return $this->render('admin/category_list.html.twig', [
-            'categories' => $categories
+            'categories' => $categories,
+            'totalElements' => $totalCategories,
+            'totalElementsPerPage' => $totalCategoriesPerPage,
+            'totalPages' => $totalPages,
+            'lastResult' => $lastResult,
+            'firstResult' => $firstResult,
+            'currentPageNumber' => $pageNumber,
+            'path' => 'admin_category_list',
+            'name' => 'categories'
         ]);
     }
 

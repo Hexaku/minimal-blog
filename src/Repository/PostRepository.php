@@ -19,6 +19,7 @@ class PostRepository extends ServiceEntityRepository
 {
     // Number of posts per page (pagination)
     public const TOTAL_POSTS_PER_PAGE = 6;
+    public const ADMIN_TOTAL_POSTS_PER_PAGE = 10;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -58,9 +59,9 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getPostsByPage(int $pageNumber)
+    public function getPostsByPage(int $pageNumber, bool $admin = false)
     {
-        $totalPostsPerPage = self::TOTAL_POSTS_PER_PAGE;
+        $totalPostsPerPage = $admin ? self::ADMIN_TOTAL_POSTS_PER_PAGE : self::TOTAL_POSTS_PER_PAGE;
 		$firstResult = ($pageNumber - 1) * $totalPostsPerPage;
 
         $queryBuilder = $this->getPostQueryBuilder()

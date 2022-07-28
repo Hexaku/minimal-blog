@@ -1,0 +1,21 @@
+<div
+    class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
+    <span class="text-sm xs:text-sm text-gray-900">
+        Showing {{ firstResult }} to {{ lastResult }} of {{ totalElements }} {{ name }}
+    </span>
+    <div class="inline-flex mt-2 xs:mt-0">
+        <a {% if currentPageNumber > 1 %} href="{{ path(path, {'pageNumber': currentPageNumber - 1}) }}" {% endif %}>
+            <button
+                class="text-sm text-indigo-50 transition duration-150 font-semibold py-2 px-4 rounded-l {% if currentPageNumber == 1 %} cursor-auto bg-gray-400 {% else %} bg-indigo-600 hover:bg-indigo-500 {% endif %}">
+                Prev
+            </button>
+        </a>
+        &nbsp; &nbsp;
+        <a {% if currentPageNumber < totalPages %} href="{{ path(path, {'pageNumber': currentPageNumber + 1}) }}" {% endif %}>
+            <button
+                class="text-sm text-indigo-50 transition duration-150 font-semibold py-2 px-4 rounded-l {% if currentPageNumber == totalPages %} cursor-auto bg-gray-400 {% else %} bg-indigo-600 hover:bg-indigo-500 {% endif %}">
+                Next
+            </button>
+        </a>
+    </div>
+</div>

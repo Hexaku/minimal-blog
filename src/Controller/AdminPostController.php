@@ -14,12 +14,39 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/posts', name:'admin_post_')]
 class AdminPostController extends AbstractController
 {
-    #[Route('/', name:'list')]
-    public function list(PostRepository $postRepository)
+    #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
+    public function list(PostRepository $postRepository, int $pageNumber = 1)
     {
-        $posts = $postRepository->findAll();
+        // Get posts by page admin and total posts count
+        $posts = $postRepository->getPostsByPage($pageNumber, true);
+        $totalPosts = count($posts);
+
+        // Calculate total pages count
+        $totalPostsPerPage = $postRepository::ADMIN_TOTAL_POSTS_PER_PAGE;
+        $totalPages = ceil($totalPosts / $totalPostsPerPage);
+
+        // Get first result page number and last result page number
+        $firstResult = 1 + ($totalPostsPerPage * ($pageNumber - 1));
+        $lastResult = $totalPostsPerPage * $pageNumber;
+
+        // Can't exceed total posts count
+        if($lastResult > $totalPosts){
+            $lastResult = $totalPosts;
+        } 
+        if($firstResult > $totalPosts){
+            $firstResult = $totalPosts;
+        }
+
         return $this->render('admin/post_list.html.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'totalElements' => $totalPosts,
+            'totalElementsPerPage' => $totalPostsPerPage,
+            'totalPages' => $totalPages,
+            'lastResult' => $lastResult,
+            'firstResult' => $firstResult,
+            'currentPageNumber' => $pageNumber,
+            'path' => 'admin_post_list',
+            'name' => 'posts'
         ]);
     }
 

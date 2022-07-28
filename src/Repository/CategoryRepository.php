@@ -18,6 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
 class CategoryRepository extends ServiceEntityRepository
 {
     public const TOTAL_CATEGORIES_PER_PAGE = 6;
+    public const ADMIN_TOTAL_CATEGORIES_PER_PAGE = 5;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -48,9 +49,9 @@ class CategoryRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-    public function getCategoriesByPage(int $pageNumber)
+    public function getCategoriesByPage(int $pageNumber, bool $admin = false)
     {
-        $totalCategoriesPerPage = self::TOTAL_CATEGORIES_PER_PAGE;
+        $totalCategoriesPerPage = $admin ? self::ADMIN_TOTAL_CATEGORIES_PER_PAGE : self::TOTAL_CATEGORIES_PER_PAGE;
 		$firstResult = ($pageNumber - 1) * $totalCategoriesPerPage;
 
         $queryBuilder = $this->getCategoryQueryBuilder()
