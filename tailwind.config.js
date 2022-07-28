@@ -22,6 +22,8 @@ module.exports = {
     extend: {},
     fontFamily: {
       'raleway': ['raleway'],
+      'uchen': ['uchen'],
+      'dancing-script': ['dancing script']
     }
   },
   plugins: [],

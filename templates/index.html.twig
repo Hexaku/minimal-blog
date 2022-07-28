@@ -5,10 +5,10 @@
 {% block body %}
 <body class="bg-gray-200 font-sans leading-normal tracking-normal"> 
 <!--Header-->
-	<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url({{ asset('build/images/mountains.jpg') }}); height: 60vh; max-height:460px; background-position: 0px 600px;">
+	<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url({{ asset('build/images/sky.jpg') }}); height: 60vh; max-height:460px; background-position: 0px 2500px;">
 			<div class="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
 				<!--Title-->
-					<p class="text-white font-extrabold text-3xl md:text-6xl font-raleway">Minimal Blog</p>
+					<p class="text-white font-extrabold text-3xl md:text-8xl font-dancing-script">Minimal Blog</p>
 			</div>
 		</div>
 		
@@ -18,41 +18,41 @@
 			<div class="mx-0 sm:mx-6">
 				
 				<!--Nav-->
-				<nav class="mt-0 w-full bg-sky-500">
+				<nav class="mt-0 w-full bg-slate-700 font-uchen">
 					<div class="container mx-auto flex items-center">
-						<div class="flex w-1/2 pl-4 text-md">
+						<div class="flex w-1/2 pl-4 text-lg">
 							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
-								<li class="mr-2">
-									<a class="inline-block py-2 px-2 text-white no-underline" href="{{ path('app_home') }}">HOME</a>
+								<li class="mr-4">
+									<a class="inline-block py-2 px-2 text-white hover:underline" href="{{ path('app_home') }}">HOME</a>
 								</li>
-								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('post_list') }}">POSTS</a>
+								<li class="mr-4">
+									<a class="inline-block text-white hover:underline no-underline hover:text-gray-200 py-2 px-2" href="{{ path('post_list') }}">POSTS</a>
 								</li>
-								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('category_list') }}">CATEGORIES</a>
+								<li class="mr-4">
+									<a class="inline-block text-white hover:underline hover:text-gray-200 py-2 px-2" href="{{ path('category_list') }}">CATEGORIES</a>
 								</li>
 								{% if is_granted('ROLE_ADMIN') %}
-								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('admin_index') }}">ADMIN DASHBOARD</a>
+								<li class="mr-4">
+									<a class="inline-block text-white hover:underline hover:text-gray-200 py-2 px-2" href="{{ path('admin_index') }}">ADMIN DASHBOARD</a>
 								</li>
 								{% endif %}
 							</ul>
 						</div>
 						<div class="flex w-1/2 justify-end content-center text-md">	
-							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+							<ul class="list-reset flex justify-between flex-1 md:flex-none items-center font-raleway">
 							{% if app.user %}
-								<li class="mr-2">
+								<li class="mr-4">
 									<p class="inline-block text-white no-underline py-2 px-2 font-bold">{{ app.user.username }}</p>
 								</li>
-								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('app_logout') }}">LOGOUT</a>
+								<li class="mr-4">
+									<a class="inline-block text-white hover:underline hover:text-gray-200 py-2 px-2" href="{{ path('app_logout') }}">LOGOUT</a>
 								</li>
 							{% else %}
-								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('app_register') }}">SIGN UP</a>
+								<li class="mr-4">
+									<a class="inline-block text-white hover:underline hover:text-gray-200 py-2 px-2" href="{{ path('app_register') }}">SIGN UP</a>
 								</li>
-								<li class="mr-2">
-									<a class="inline-block text-gray-600 no-underline hover:text-gray-200 py-2 px-2" href="{{ path('app_login') }}">LOGIN</a>
+								<li class="mr-4">
+									<a class="inline-block text-white hover:underline hover:text-gray-200 py-2 px-2" href="{{ path('app_login') }}">LOGIN</a>
 								</li>
 							{% endif %}
 							</ul>
