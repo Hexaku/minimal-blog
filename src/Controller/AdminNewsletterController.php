@@ -17,12 +17,39 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/newsletters', name:'admin_newsletter_')]
 class AdminNewsletterController extends AbstractController
 {
-    #[Route('/', name:'list')]
-    public function list(NewsletterRepository $newsletterRepository)
+    #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
+    public function list(NewsletterRepository $newsletterRepository, int $pageNumber = 1)
     {
-        $newsletters = $newsletterRepository->findAll();
+        // Get newsletters by page admin and total newsletters count
+        $newsletters = $newsletterRepository->getNewslettersByPage($pageNumber);
+        $totalNewsletters = count($newsletters);
+
+        // Calculate total pages count
+        $totalNewslettersPerPage = $newsletterRepository::ADMIN_TOTAL_NEWSLETTERS_PER_PAGE;
+        $totalPages = ceil($totalNewsletters / $totalNewslettersPerPage);
+
+        // Get first result page number and last result page number
+        $firstResult = 1 + ($totalNewslettersPerPage * ($pageNumber - 1));
+        $lastResult = $totalNewslettersPerPage * $pageNumber;
+
+        // Can't exceed total newsletters count
+        if($lastResult > $totalNewsletters){
+            $lastResult = $totalNewsletters;
+        } 
+        if($firstResult > $totalNewsletters){
+            $firstResult = $totalNewsletters;
+        }
+
         return $this->render('admin/newsletter_list.html.twig', [
-            'newsletters' => $newsletters
+            'newsletters' => $newsletters,
+            'totalElements' => $totalNewsletters,
+            'totalElementsPerPage' => $totalNewslettersPerPage,
+            'totalPages' => $totalPages,
+            'lastResult' => $lastResult,
+            'firstResult' => $firstResult,
+            'currentPageNumber' => $pageNumber,
+            'path' => 'admin_newsletter_list',
+            'name' => 'newsletters'
         ]);
     }
 

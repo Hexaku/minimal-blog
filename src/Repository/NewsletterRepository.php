@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Newsletter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class NewsletterRepository extends ServiceEntityRepository
 {
+    public const ADMIN_TOTAL_NEWSLETTERS_PER_PAGE = 5;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Newsletter::class);
@@ -37,6 +40,27 @@ class NewsletterRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getNewsletterQueryBuilder()
+    {
+        $queryBuilder = $this->createQueryBuilder('n');
+        return $queryBuilder;
+    }
+
+    public function getNewslettersByPage(int $pageNumber)
+    {
+        $totalNewslettersPerPage = self::ADMIN_TOTAL_NEWSLETTERS_PER_PAGE;
+		$firstResult = ($pageNumber - 1) * $totalNewslettersPerPage;
+
+        $queryBuilder = $this->getNewsletterQueryBuilder()
+            ->setFirstResult($firstResult)
+            ->setMaxResults($totalNewslettersPerPage);
+        
+        $query = $queryBuilder->getQuery();
+
+        $paginator = new Paginator($query, true);
+        return $paginator;
     }
 
 //    /**

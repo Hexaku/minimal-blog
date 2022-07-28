@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\NewsletterSubscriber;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class NewsletterSubscriberRepository extends ServiceEntityRepository
 {
+    public const ADMIN_TOTAL_SUBSCRIBERS_PER_PAGE = 10;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, NewsletterSubscriber::class);
@@ -39,6 +42,26 @@ class NewsletterSubscriberRepository extends ServiceEntityRepository
         }
     }
 
+    public function getNewsletterSubscriberQueryBuilder()
+    {
+        $queryBuilder = $this->createQueryBuilder('ns');
+        return $queryBuilder;
+    }
+
+    public function getNewsletterSubscribersByPage(int $pageNumber)
+    {
+        $totalSubscribersPerPage = self::ADMIN_TOTAL_SUBSCRIBERS_PER_PAGE;
+		$firstResult = ($pageNumber - 1) * $totalSubscribersPerPage;
+
+        $queryBuilder = $this->getNewsletterSubscriberQueryBuilder()
+            ->setFirstResult($firstResult)
+            ->setMaxResults($totalSubscribersPerPage);
+        
+        $query = $queryBuilder->getQuery();
+
+        $paginator = new Paginator($query, true);
+        return $paginator;
+    }
 //    /**
 //     * @return NewsletterSubscriber[] Returns an array of NewsletterSubscriber objects
 //     */

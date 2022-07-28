@@ -5,15 +5,15 @@
 	<div class=" flex items-center justify-between pb-6">
 		<div>
 			<h2 class="text-gray-600 font-semibold">Newsletters</h2>
-			<span class="text-xs">Total newsletters : {{ newsletters|length }} </span>
+			<span class="text-xs">Total newsletters : {{ totalElements }} </span>
 		</div>
 		<div class="flex items-center justify-between">
 				<div class="lg:ml-40 ml-10 space-x-8">
 					<a href="{{ path('admin_newsletter_subscriber_list') }}">
-                        <button class="bg-yellow-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-users"></i></span> Show subscriber list</button>
+                        <button class="bg-yellow-400 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-users mr-1"></i></span> Show subscriber list</button>
                     </a>
 					<a href="{{ path('admin_newsletter_new')}}">
-                        <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus"></i></span> New newsletter</button>
+                        <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus mr-1"></i></span> New newsletter</button>
                     </a>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
                             {% for newsletter in newsletters %}
 							<tr>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-									<p class="text-gray-900 whitespace-no-wrap font-bold">{{ loop.index }}</p>
+									<p class="text-gray-900 whitespace-no-wrap font-bold">{{ loop.index + (currentPageNumber - 1) * totalElementsPerPage}}</p>
 								</td>
 								<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 									<p class="text-gray-900 whitespace-no-wrap font-bold">{{ newsletter.title }}</p>
@@ -71,23 +71,9 @@
                             {% endfor %}
 						</tbody>
 					</table>
-					<div
-						class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
-						<span class="text-xs xs:text-sm text-gray-900">
-                            Showing 1 to X of {{ newsletters|length}} Entries
-                        </span>
-						<div class="inline-flex mt-2 xs:mt-0">
-							<button
-                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
-                                Prev
-                            </button>
-							&nbsp; &nbsp;
-							<button
-                                class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
-                                Next
-                            </button>
-						</div>
-					</div>
+						<!-- Paginator -->
+						{% include 'admin/_paginator.html.twig' %}
+						<!-- /Paginator -->
 					{% else %}
 					<div class="text-center py-16">
 						<h1 class="font-bold break-normal text-2xl md:text-2xl">There is no newsletter yet ! You can add some with the "New newsletter" button !</h1>

@@ -5,12 +5,12 @@
 	<div class=" flex items-center justify-between pb-6">
 		<div>
 			<h2 class="text-gray-600 font-semibold">Categories</h2>
-			<span class="text-xs">Total categories : {{ categories|length }} </span>
+			<span class="text-xs">Total categories : {{ totalElements }} </span>
 		</div>
 		<div class="flex items-center justify-between">
 				<div class="lg:ml-40 ml-10 space-x-8">
 					<a href="{{ path('admin_category_new')}}">
-                        <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus"></i></span> New category</button>
+                        <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-circle-plus mr-1"></i></span> New category</button>
                     </a>
 				</div>
 			</div>
