@@ -9,9 +9,7 @@ use App\Repository\NewsletterRepository;
 use App\Repository\NewsletterSubscriberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/newsletters', name:'admin_newsletter_')]
@@ -63,6 +61,8 @@ class AdminNewsletterController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $newsletter->setIsSent(false);
             $newsletterRepository->add($newsletter, true);
+            $this->addFlash('success', 'Newsletter successfully created !');
+
             return $this->redirectToRoute('admin_newsletter_list');
         }
 
@@ -89,6 +89,8 @@ class AdminNewsletterController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $newsletterRepository->add($newsletter, true);
+            $this->addFlash('success', 'Newsletter successfully updated !');
+
             return $this->redirectToRoute('admin_newsletter_list');
         }
 
@@ -103,6 +105,7 @@ class AdminNewsletterController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$newsletter->getId(), $request->request->get('_token'))) {
             $newsletterRepository->remove($newsletter, true);
+            $this->addFlash('success', 'Newsletter successfully deleted !');
         }
         return $this->redirectToRoute('admin_newsletter_list');
     }
@@ -121,6 +124,7 @@ class AdminNewsletterController extends AbstractController
 
         $newsletter->setIsSent(true);
         $newsletterRepository->add($newsletter, true);
+        $this->addFlash('info', 'All newsletters emails are successfully sent to RabbitMQ ! Don\'t forget to consume !');
         
         return $this->redirectToRoute('admin_newsletter_list');
     }

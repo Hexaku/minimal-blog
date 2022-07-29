@@ -63,6 +63,7 @@ class AdminPostController extends AbstractController
             $post->setCreatedAt(new DateTimeImmutable());
 
             $postRepository->add($post, true);
+            $this->addFlash('success', 'Post successfully created !');
 
             return $this->redirectToRoute('admin_post_list');
         }
@@ -80,11 +81,12 @@ class AdminPostController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             $slug = $slugifier->slugify($post->getTitle());
             $post->setSlug($slug);
 
             $postRepository->add($post, true);
+            $this->addFlash('success', 'Post successfully updated !');
 
             return $this->redirectToRoute('admin_post_list');
         }
@@ -100,6 +102,7 @@ class AdminPostController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$post->getSlug(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);
+            $this->addFlash('success', 'Post successfully deleted !');
         }
         return $this->redirectToRoute('admin_post_list');
     }

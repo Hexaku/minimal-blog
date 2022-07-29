@@ -10,7 +10,7 @@ class NewsletterSubscriberFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // Creating 50 subscribers
+        // Create 50 subscribers
         for($i=1; $i<=50; $i++){
             $newsletterSubscriber = (new NewsletterSubscriber())
                 ->setEmail("subscriber$i@minimal.com");

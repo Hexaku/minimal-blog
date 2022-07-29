@@ -61,6 +61,8 @@ class AdminCategoryController extends AbstractController
             $category->setSlug($slug);
 
             $categoryRepository->add($category, true);
+            $this->addFlash('success', 'Category successfully created !');
+
             return $this->redirectToRoute('admin_category_list');
         }
 
@@ -81,6 +83,7 @@ class AdminCategoryController extends AbstractController
             $slug = $slugifier->slugify($category->getName());
             $category->setSlug($slug);
             $categoryRepository->add($category, true);
+            $this->addFlash('success', 'Category successfully updated !');
 
             return $this->redirectToRoute('admin_category_list');
         }
@@ -97,6 +100,7 @@ class AdminCategoryController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$category->getSlug(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);
+            $this->addFlash('success', 'Category successfully deleted !');
         }
         return $this->redirectToRoute('admin_category_list');
     }
