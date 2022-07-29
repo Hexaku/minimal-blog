@@ -25,6 +25,8 @@ class CommentController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $comment->setIsEdited(true);
             $commentRepository->add($comment, true);
+            $this->addFlash('success', 'Your comment has been updated');
+
             return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
         }
 
@@ -41,6 +43,12 @@ class CommentController extends AbstractController
         $post = $comment->getPost();
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
             $commentRepository->remove($comment, true);
+            if($this->isGranted('ROLE_ADMIN')){
+                $this->addFlash('success', 'This comment has been deleted');
+            } else {
+                $this->addFlash('success', 'Your comment has been deleted');
+
+            }
         }
         return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
     }

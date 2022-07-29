@@ -19,7 +19,7 @@ fos_ck_editor:
             stylesSet: "my_styles"
             toolbar:
                 - { name: 'full.styles', items: [ 'Styles', 'Format', 'TextColor' ] }
-                - { name: "styles", items: ['Bold', 'Italic', 'BulletedList', 'Link'] }
+                - { name: "styles", items: ['Bold', 'Italic', 'BulletedList', 'Link', 'Source'] }
     styles:
         my_styles:
             - { name: "H1", element: "p", attributes: { class: "text-2xl md:text-3xl mb-5" }}

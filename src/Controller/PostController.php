@@ -70,6 +70,7 @@ class PostController extends AbstractController
             $comment->setIsEdited(false);
 
             $commentRepository->add($comment, true);
+            $this->addFlash('success', 'Your comment has been post !');
 
             return $this->redirectToRoute('post_show', ['slug' => $post->getSlug()]);
         }

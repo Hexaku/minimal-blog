@@ -15,7 +15,11 @@ class PostType extends AbstractType
         $builder
             ->add('title')
             ->add('synopsis')
-            ->add('content', CKEditorType::class)
+            ->add('content', CKEditorType::class, [
+                'config' => [
+                    'height' => 400
+                ]
+            ])
             ->add('category', null, ['choice_label' => 'name']);
         ;
     }
