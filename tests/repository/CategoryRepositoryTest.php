@@ -8,7 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class CategoryRepositoryTest extends KernelTestCase
 {
-    public function testCount()
+    // Check total count of categories fixtures
+    public function testCountFixtures()
     {
         self::bootKernel();
         $categoryFixtures = self::getContainer()->get(CategoryFixtures::class);

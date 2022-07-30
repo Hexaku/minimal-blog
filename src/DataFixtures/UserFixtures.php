@@ -23,6 +23,8 @@ class UserFixtures extends Fixture
         'Chubert'
     ];
 
+    public const ADMIN_EMAIL = 'admin@minimal.com';
+
     public function __construct(private UserPasswordHasherInterface $userPasswordHasherInterface)
     {}
 
@@ -30,7 +32,7 @@ class UserFixtures extends Fixture
     {
         $admin = (new User())
             ->setUsername('Admin')
-            ->setEmail('admin@minimal.com')
+            ->setEmail(self::ADMIN_EMAIL)
             ->setRoles(['ROLE_ADMIN']);
         $adminPlainPassword = 'admin';
         $adminHashedPassword = $this->userPasswordHasherInterface->hashPassword($admin, $adminPlainPassword);

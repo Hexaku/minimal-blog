@@ -9,8 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class PostRepositoryTest extends KernelTestCase
 {
-    // Check total count of posts
-    public function testCount()
+    // Check total count of posts fixtures
+    public function testCountFixtures()
     {
         self::bootKernel();
         $postFixtures = self::getContainer()->get(PostFixtures::class);
@@ -20,14 +20,14 @@ class PostRepositoryTest extends KernelTestCase
         $this->assertEquals($totalPostsExpected, $totalPosts);
     }
 
-    // Check that post should have a category
+    // Check all posts should have a category
     public function testShouldHaveCategory()
     {
         self::bootKernel();
         $posts = self::getContainer()->get(PostRepository::class)->findAll();
         // Get latest post for test
-        $post = $posts[0];
-
-        $this->assertInstanceOf(Category::class, $post->getCategory());
+        foreach($posts as $post){
+            $this->assertInstanceOf(Category::class, $post->getCategory());
+        }
     }
 }
