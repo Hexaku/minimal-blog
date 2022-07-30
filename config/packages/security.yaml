@@ -21,7 +21,7 @@ security:
                 check_path: app_login
             
             login_throttling:
-                max_attempts: 5
+                max_attempts: 10
                 interval: '15 minutes'
 
             logout:

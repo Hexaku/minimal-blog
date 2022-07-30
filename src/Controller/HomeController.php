@@ -16,7 +16,7 @@ class HomeController extends AbstractController
 {
 
     #[Route('/', name: 'app_home')]
-    public function home(PostRepository $postRepository, NewsletterSubscriberRepository $newsletterSubscriberRepository, Request $request)
+    public function index(PostRepository $postRepository, NewsletterSubscriberRepository $newsletterSubscriberRepository, Request $request)
     {
         $newsletterSubscriber = new NewsletterSubscriber();
         $newsletterSubscriberForm = $this->createForm(NewsletterSubscriberType::class, $newsletterSubscriber);

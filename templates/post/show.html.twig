@@ -49,7 +49,7 @@
 			{% else %}
 			<div class="flex items-center justify-center my-24">
 				<div class="rounded-xl border p-5 w-9/12 bg-white">
-					<p class="text-lg md:text-lg text-green-500">You need to be connected to post a comment ! <a href="{{ path('app_login') }}" class="font-bold hover:underline">Login here</a> or <a href="{{ path('app_register') }}" class="font-bold hover:underline">Join us !</a></p>
+					<p id="comment_login" class="text-lg md:text-lg text-green-500">You need to be connected to post a comment ! <a href="{{ path('app_login') }}" class="font-bold hover:underline">Login here</a> or <a href="{{ path('app_register') }}" class="font-bold hover:underline">Join us !</a></p>
 				</div>
 			</div>
 			{% endif %}
