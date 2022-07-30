@@ -9,9 +9,8 @@ class CategoryEntityTest extends KernelTestCase
 {
     public function getCategory(): Category
     {
-        $category = (new Category())
+        return (new Category())
             ->setName('Habits');
-        return $category;
     }
 
     public function assertHasErrors(Category $category, int $errorsExpected = 0)
