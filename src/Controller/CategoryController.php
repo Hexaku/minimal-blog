@@ -6,13 +6,14 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/categories', name: 'category_')]
 class CategoryController extends AbstractController
 {
     #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
-    public function list(CategoryRepository $categoryRepository, int $pageNumber = 1)
+    public function list(CategoryRepository $categoryRepository, int $pageNumber = 1): Response
     {
         // Get categories by page and total categories count
         $categories = $categoryRepository->getCategoriesByPage($pageNumber);
@@ -47,7 +48,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{slug}', name: 'show')]
-    public function show(Category $category, EntityManagerInterface $manager)
+    public function show(Category $category, EntityManagerInterface $manager): Response
     {
         $categoryRepository = $manager->getRepository(Category::class);
         $posts = $categoryRepository->findAllLatestPosts($category->getId());

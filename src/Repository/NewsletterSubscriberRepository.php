@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\NewsletterSubscriber;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -42,13 +43,13 @@ class NewsletterSubscriberRepository extends ServiceEntityRepository
         }
     }
 
-    public function getNewsletterSubscriberQueryBuilder()
+    public function getNewsletterSubscriberQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('ns');
         return $queryBuilder;
     }
 
-    public function getNewsletterSubscribersByPage(int $pageNumber)
+    public function getNewsletterSubscribersByPage(int $pageNumber): Paginator
     {
         $totalSubscribersPerPage = self::ADMIN_TOTAL_SUBSCRIBERS_PER_PAGE;
 		$firstResult = ($pageNumber - 1) * $totalSubscribersPerPage;
@@ -62,28 +63,4 @@ class NewsletterSubscriberRepository extends ServiceEntityRepository
         $paginator = new Paginator($query, true);
         return $paginator;
     }
-//    /**
-//     * @return NewsletterSubscriber[] Returns an array of NewsletterSubscriber objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?NewsletterSubscriber
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

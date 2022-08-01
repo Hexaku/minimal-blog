@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -44,13 +45,13 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    public function getPostQueryBuilder()
+    public function getPostQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('p');
         return $queryBuilder;
     }
 
-    public function findLastXPosts(int $limit)
+    public function findLastXPosts(int $limit): array
     {
         return $this->getPostQueryBuilder()
             ->orderBy('p.created_at', 'DESC')
@@ -59,7 +60,7 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getPostsByPage(int $pageNumber, bool $admin = false)
+    public function getPostsByPage(int $pageNumber, bool $admin = false): Paginator
     {
         $totalPostsPerPage = $admin ? self::ADMIN_TOTAL_POSTS_PER_PAGE : self::TOTAL_POSTS_PER_PAGE;
 		$firstResult = ($pageNumber - 1) * $totalPostsPerPage;
@@ -75,36 +76,11 @@ class PostRepository extends ServiceEntityRepository
         return $paginator;
     }
 
-    public function findAll()
+    public function findAll(): array
     {
         return $this->getPostQueryBuilder()
         ->orderBy('p.created_at', 'DESC')
         ->getQuery()
         ->getResult();
     }
-
-//    /**
-//     * @return Post[] Returns an array of Post objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Post
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

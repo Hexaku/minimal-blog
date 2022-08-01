@@ -6,17 +6,16 @@ use App\Entity\NewsletterSubscriber;
 use App\Form\NewsletterSubscriberType;
 use App\Repository\NewsletterSubscriberRepository;
 use App\Repository\PostRepository;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
 
     #[Route('/', name: 'app_home')]
-    public function index(PostRepository $postRepository, NewsletterSubscriberRepository $newsletterSubscriberRepository, Request $request)
+    public function index(PostRepository $postRepository, NewsletterSubscriberRepository $newsletterSubscriberRepository, Request $request): Response
     {
         $newsletterSubscriber = new NewsletterSubscriber();
         $newsletterSubscriberForm = $this->createForm(NewsletterSubscriberType::class, $newsletterSubscriber);

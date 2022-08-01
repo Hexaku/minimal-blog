@@ -13,13 +13,14 @@ use App\Repository\PostRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/posts', name: 'post_')]
 class PostController extends AbstractController
 {
     #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
-    public function list(PostRepository $postRepository, int $pageNumber = 1)
+    public function list(PostRepository $postRepository, int $pageNumber = 1): Response
     {
         // Get posts by page and total posts count
         $posts = $postRepository->getPostsByPage($pageNumber);
@@ -54,7 +55,7 @@ class PostController extends AbstractController
     }
 
     #[Route('/{slug}', name:'show')]
-    public function show(Post $post, CommentRepository $commentRepository, NewsletterSubscriberRepository $newsletterSubscriberRepository, Request $request)
+    public function show(Post $post, CommentRepository $commentRepository, NewsletterSubscriberRepository $newsletterSubscriberRepository, Request $request): Response
     {
         $comments = $commentRepository->findAllLatestCommentsByPost($post->getId());
 

@@ -9,13 +9,14 @@ use App\Service\Slugifier;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/posts', name:'admin_post_')]
 class AdminPostController extends AbstractController
 {
     #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
-    public function list(PostRepository $postRepository, int $pageNumber = 1)
+    public function list(PostRepository $postRepository, int $pageNumber = 1): Response
     {
         // Get posts by page admin and total posts count
         $posts = $postRepository->getPostsByPage($pageNumber, true);
@@ -51,7 +52,7 @@ class AdminPostController extends AbstractController
     }
 
     #[Route('/new', name: 'new')]
-    public function new(PostRepository $postRepository, Request $request, Slugifier $slugifier)
+    public function new(PostRepository $postRepository, Request $request, Slugifier $slugifier): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
@@ -75,7 +76,7 @@ class AdminPostController extends AbstractController
     }
 
     #[Route('/{slug}/edit', name:'edit')]
-    public function edit(Post $post, PostRepository $postRepository, Request $request, Slugifier $slugifier)
+    public function edit(Post $post, PostRepository $postRepository, Request $request, Slugifier $slugifier): Response
     {
         $form = $this->createForm(PostType::class, $post);
 
@@ -98,7 +99,7 @@ class AdminPostController extends AbstractController
     }
 
     #[Route('/{slug}/delete', name:'delete')]
-    public function delete(Post $post, PostRepository $postRepository, Request $request)
+    public function delete(Post $post, PostRepository $postRepository, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getSlug(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);

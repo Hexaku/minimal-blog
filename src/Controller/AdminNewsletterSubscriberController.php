@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use App\Repository\NewsletterSubscriberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/newsletter/subscribers', name:'admin_newsletter_subscriber_')]
 class AdminNewsletterSubscriberController extends AbstractController
 {
     #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
-    public function list(NewsletterSubscriberRepository $newsletterSubscriberRepository, int $pageNumber = 1)
+    public function list(NewsletterSubscriberRepository $newsletterSubscriberRepository, int $pageNumber = 1): Response
     {
         // Get subscribers by page admin and total subscribers count
         $newsletterSubscribers = $newsletterSubscriberRepository->getNewsletterSubscribersByPage($pageNumber, true);

@@ -24,7 +24,6 @@ class ContainsAlphaNumericOnlyValidator extends ConstraintValidator
         }
 
         if(!preg_match('/^[a-zA-Z0-9]+$/', $value)){
-            // TODO: implement the validation here
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $value)
                 ->addViolation();

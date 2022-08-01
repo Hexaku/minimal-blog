@@ -9,6 +9,7 @@ use App\Repository\NewsletterRepository;
 use App\Repository\NewsletterSubscriberRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminNewsletterController extends AbstractController
 {
     #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
-    public function list(NewsletterRepository $newsletterRepository, int $pageNumber = 1)
+    public function list(NewsletterRepository $newsletterRepository, int $pageNumber = 1): Response
     {
         // Get newsletters by page admin and total newsletters count
         $newsletters = $newsletterRepository->getNewslettersByPage($pageNumber);
@@ -52,7 +53,7 @@ class AdminNewsletterController extends AbstractController
     }
 
     #[Route('/new', name:'new')]
-    public function new(NewsletterRepository $newsletterRepository,  Request $request)
+    public function new(NewsletterRepository $newsletterRepository,  Request $request): Response
     {
         $newsletter = new Newsletter();
         $form = $this->createForm(NewsletterType::class, $newsletter);
@@ -73,7 +74,7 @@ class AdminNewsletterController extends AbstractController
     }
 
     #[Route('/{id}', name:'show')]
-    public function show(Newsletter $newsletter)
+    public function show(Newsletter $newsletter): Response
     {
         return $this->render('admin/newsletter_show.html.twig', [
             'newsletter' => $newsletter
@@ -81,7 +82,7 @@ class AdminNewsletterController extends AbstractController
     }
 
     #[Route('/{id}/edit', name:'edit')]
-    public function edit(Newsletter $newsletter, NewsletterRepository $newsletterRepository, Request $request)
+    public function edit(Newsletter $newsletter, NewsletterRepository $newsletterRepository, Request $request): Response
     {
         $form = $this->createForm(NewsletterType::class, $newsletter);
 
@@ -101,7 +102,7 @@ class AdminNewsletterController extends AbstractController
     }
 
     #[Route('/{id}/delete', name:'delete')]
-    public function delete(Newsletter $newsletter, NewsletterRepository $newsletterRepository, Request $request)
+    public function delete(Newsletter $newsletter, NewsletterRepository $newsletterRepository, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$newsletter->getId(), $request->request->get('_token'))) {
             $newsletterRepository->remove($newsletter, true);
@@ -111,7 +112,7 @@ class AdminNewsletterController extends AbstractController
     }
 
     #[Route('/{id}/send', name:'send')]
-    public function send(Newsletter $newsletter, NewsletterSubscriberRepository $newsletterSubscriberRepository, NewsletterRepository $newsletterRepository, MessageBusInterface $bus)
+    public function send(Newsletter $newsletter, NewsletterSubscriberRepository $newsletterSubscriberRepository, NewsletterRepository $newsletterRepository, MessageBusInterface $bus): Response
     {
         $newsletterSubscribers = $newsletterSubscriberRepository->findAll();
         foreach($newsletterSubscribers as $newsletterSubscriber){

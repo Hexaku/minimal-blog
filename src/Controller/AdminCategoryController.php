@@ -8,13 +8,14 @@ use App\Repository\CategoryRepository;
 use App\Service\Slugifier;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin/categories', name:'admin_category_')]
 class AdminCategoryController extends AbstractController
 {
     #[Route('/page/{pageNumber}', name:'list', requirements: ['pageNumber' => '\d+'])]
-    public function list(CategoryRepository $categoryRepository, int $pageNumber = 1)
+    public function list(CategoryRepository $categoryRepository, int $pageNumber = 1): Response
     {
         // Get categories by page admin and total categories count
         $categories = $categoryRepository->getCategoriesByPage($pageNumber, true);
@@ -50,7 +51,7 @@ class AdminCategoryController extends AbstractController
     }
 
     #[Route('/new', name:'new')]
-    public function new(CategoryRepository $categoryRepository, Request $request, Slugifier $slugifier)
+    public function new(CategoryRepository $categoryRepository, Request $request, Slugifier $slugifier): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -73,7 +74,7 @@ class AdminCategoryController extends AbstractController
     }
 
     #[Route('/{slug}/edit', name:'edit')]
-    public function edit(Category $category, CategoryRepository $categoryRepository, Request $request, Slugifier $slugifier)
+    public function edit(Category $category, CategoryRepository $categoryRepository, Request $request, Slugifier $slugifier): Response
     {
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
@@ -96,7 +97,7 @@ class AdminCategoryController extends AbstractController
     }
 
     #[Route('/{slug}/delete', name:'delete')]
-    public function delete(Category $category, CategoryRepository $categoryRepository, Request $request)
+    public function delete(Category $category, CategoryRepository $categoryRepository, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getSlug(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);

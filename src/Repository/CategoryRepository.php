@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,13 +44,13 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
-    public function getCategoryQueryBuilder()
+    public function getCategoryQueryBuilder(): QueryBuilder
     {
         $queryBuilder = $this->createQueryBuilder('c');
         return $queryBuilder;
     }
 
-    public function getCategoriesByPage(int $pageNumber, bool $admin = false)
+    public function getCategoriesByPage(int $pageNumber, bool $admin = false): Paginator
     {
         $totalCategoriesPerPage = $admin ? self::ADMIN_TOTAL_CATEGORIES_PER_PAGE : self::TOTAL_CATEGORIES_PER_PAGE;
 		$firstResult = ($pageNumber - 1) * $totalCategoriesPerPage;
@@ -64,7 +65,7 @@ class CategoryRepository extends ServiceEntityRepository
         return $paginator;
     }
 
-    public function findAllLatestPosts(int $categoryId)
+    public function findAllLatestPosts(int $categoryId): array
     {
         return $this->getCategoryQueryBuilder()
             ->select('p.id', 'p.title', 'p.synopsis', 'p.created_at', 'p.slug')
@@ -75,29 +76,4 @@ class CategoryRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
-//    /**
-//     * @return Category[] Returns an array of Category objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Category
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
