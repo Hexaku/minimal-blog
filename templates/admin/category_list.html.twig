@@ -48,6 +48,9 @@
 									<p class="text-gray-900 whitespace-no-wrap font-bold">{{ category.name }}</p>
 								</td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
+									<a href="{{ path('category_show', {slug: category.slug}) }}">
+                                        <button class="mx-1 bg-blue-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-eye"></i></span> Show</button>
+                                    </a>
                                     <a href="{{ path('admin_category_edit', {'slug': category.slug}) }}">
                                         <button class="mx-1 bg-green-500 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"><span><i class="fa-solid fa-file-pen"></i></span> Edit</button>
                                     </a>
