@@ -1,7 +1,7 @@
 
 # Minimal Blog
 
-![](assets/images/minimal)
+![](assets/images/minimal_blog.gif)
 
 ![](assets/images/minimal2)
 
