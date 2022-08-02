@@ -3,7 +3,7 @@
 
 ![](assets/images/minimal_blog.gif)
 
-![](assets/images/minimal2)
+![](assets/images/minimal_blog2.gif)
 
 Minimal Blog is a simple blog designed with a minimalist interface. 
 A user can move into categories, read articles and interact with the author through comment section.
@@ -16,6 +16,7 @@ The author of the blog has complete control on every content via a secure admin 
 * CRUD on categories, posts, comments, newsletters
 * Security (authentification, authorization, voters)
 * Customs elements (slugifier service, twig extension for dates, validator, querybuilders...)
+* Doctrine paginators
 * Async messages (newsletter emails) with Messenger and RabbitMQ via Docker
 * Test covering (unit and functionnal tests) with PHPUnit
 
