@@ -3,8 +3,6 @@
 
 ![](assets/images/minimal_blog.gif)
 
-![](assets/images/minimal_blog2.gif)
-
 Minimal Blog is a simple blog designed with a minimalist interface. 
 A user can move into categories, read articles and interact with the author through comment section.
 The author of the blog has complete control on every content via a secure admin dashboard. 
@@ -21,6 +19,8 @@ The author of the blog has complete control on every content via a secure admin 
 * Test covering (unit and functionnal tests) with PHPUnit
 
 ## Get Started 
+
+![](assets/images/minimal_blog2.gif)
 
 ### Prerequisites
 
@@ -59,7 +59,7 @@ The author of the blog has complete control on every content via a secure admin 
 ### Testing
 
 By default, all tests work with fixtures, so don't forget to load them !
-1. Update your `.env.test` and edit the database DSN
+1. Update your `.env.test` and add your test database DSN
 2. Create database, apply migrations, and fill it with fixtures : 
 `bin/console doctrine:database:create --env=test`
 `bin/console doctrine:migrations:migrate --env=test`
